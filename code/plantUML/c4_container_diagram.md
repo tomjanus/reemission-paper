@@ -9,7 +9,7 @@ Person(user, "Reservoir Emission Modeller", "Runs analyses via CLI or as a libra
 System_Boundary(reemission_sys, "Re-Emission") {
     Container(cli, "CLI Tool", "Click/Python", "Commands `reemission` & `reemission-geocaret`")  
     Container(config_loader, "Configuration Loader", "Python", "Reads model & output settings from YAML and .INI")
-    Container(input_handler, "Input Handler", "Python", "Parses JSON/CSV input into `Inputs` objects")  
+    Container(input_handler, "Input Handler", "Python", "Parses JSON input into `Inputs` objects")  
     Container(core_lib, "Core Library", "Python", "Executes `EmissionModel.calculate()`")  
     Container(output_generator, "Output Generator", "Python", "Formats & writes Excel, JSON, HTML PDF reports")
 }

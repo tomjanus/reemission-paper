@@ -56,9 +56,9 @@ registry --> core: provides data
 registry --> presentation : provides data
 
 ' Annotation
-' note bottom of model
-'  Central coordination of the
-'  emissions estimation workflow
-' end note
+note bottom of model
+  Central coordination of the
+  emissions estimation workflow
+end note
 
 @enduml
