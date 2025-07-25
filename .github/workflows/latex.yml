@@ -17,25 +17,7 @@ jobs:
       - name: 🔧 Set up LaTeX environment
         uses: muzimuzhi/setup-texlive-action@v3
         with:
-          packages: >-
-            scheme-basic
-            latexmk
-            graphics
-            svg
-            tools
-            bibtex
-            algorithms
-            listings
-            xcolor
-            adjustbox
-            booktabs
-            threeparttable
-            rotating
-            tablefootnote
-            acronym
-            refcount
-            xparse
-            soul
+          packages: scheme-full
 
       - name: 🛠 Install required tools
         run: |
