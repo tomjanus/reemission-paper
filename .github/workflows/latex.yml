@@ -31,6 +31,7 @@ jobs:
           pip3 install cairosvg
 
       - name: 🚧 Build paper
+        working-directory: paper_source
         run: |
           make
 
