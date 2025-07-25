@@ -468,3 +468,12 @@ dask-worker-space/
 
 # Exclude any unused files
 **/unused/
+
+# code/outputs
+*.pkl
+
+# manuscript not-gitted folders
+internal_revisions/
+literature/
+paper_source/figures/src/
+code/outputs_and_intermediate/

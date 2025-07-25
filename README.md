@@ -16,18 +16,12 @@ You can compile the paper using:
 make
 ```
 
+inside the `paper_source` directory. For this, you need to install `make` on your operating system.
+
 This will:
-- Convert all `.svg` figures in `paper_source/figures/` to `.pdf`
-- Compile the LaTeX document in `paper_source/reemission.tex`
-- Output the final PDF at `paper_source/reemission.pdf`
-
-Alternatively, you can use the Python helper:
-
-```bash
-python build.py
-```
-
-This does the same as `make`, and is helpful on systems without `make`.
+- Convert all `.svg` figures in `./figures/` to `.pdf`
+- Compile the LaTeX document in `./reemission.tex`
+- Output the final PDF at `./reemission.pdf`
 
 ---
 
@@ -39,7 +33,7 @@ To clean intermediate LaTeX files (e.g., `.aux`, `.log`, `.out`, `.toc`, `.bbl`,
 make clean
 ```
 
-To also remove all generated figure PDFs and the final compiled paper:
+inside the `paper_source` directory. To also remove all generated figure PDFs and the final compiled paper:
 
 ```bash
 make cleanall
@@ -52,20 +46,21 @@ make cleanall
 ```
 .
 ├── paper_source/
-│   ├── figures/              # Contains all .svg and generated .pdf figures
-│   ├── reemission.tex        # Main LaTeX source file
-│   ├── references.bib        # Bibliography file
-│   └── reemission.pdf        # Output (generated)
+│   ├── figures/                  # Contains all .svg and generated .pdf figures
+│   ├── reemission.tex            # Main LaTeX source file
+│   ├── reemission.bib            # Bibliography file
+│   ├── reemission.pdf            # Output (generated)
+│   └── Makefile                  # Build rules (LaTeX + figures)
 ├── code/
-│   ├── plantUML/             # Contains all diagrams (UML / YAML config files, etc.)
-│   ├── Python/               # Contains all source code in Python
-│   └── R/                    # Contains all source code in R
-├── Makefile                  # Build rules (LaTeX + figures)
-├── build.py                  # Optional build script in Python
+│   ├── plantUML/                 # Contains all diagrams (UML / YAML config files, etc.)
+│   ├── Python/                   # Contains all source code in Python
+│   ├── data/                     # Contains input data for generating validation and case study figures
+│   ├── outputs_and_intermediate/ # Contains intermediate and final output files from Python and R scripts
+│   └── R/                        # Contains all source code in R
 ├── .github/
 │   └── workflows/
-│       └── latex.yml         # GitHub Actions workflow for CI builds
-└── README.md                 # You're reading it
+│       └── latex.yml             # GitHub Actions workflow for CI builds
+└── README.md                     # You're reading it
 ```
 
 ---

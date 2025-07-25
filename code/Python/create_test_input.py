@@ -1,8 +1,9 @@
 """ """
+from typing import Any
 import json
 import random
 import argparse
-from pathlib import Path
+from pathlib
 
 # Define the available options for each field
 BIOGENIC_OPTIONS = {
@@ -21,11 +22,11 @@ BIOGENIC_OPTIONS = {
     "landuse_intensity": ["low intensity", "high intensity"]
 }
 
-def load_json_file(filepath):
+def load_json_file(filepath: pathlib.Path | str):
     with open(filepath, 'r') as f:
         return json.load(f)
 
-def save_json_file(data, filepath):
+def save_json_file(data: Any, filepath: pathlib.Path | str):
     with open(filepath, 'w') as f:
         json.dump(data, f, indent=2)
 

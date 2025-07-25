@@ -1,0 +1,88 @@
+a:
+  nominal_value: 1.0
+  bound:
+  - 0.5
+  - 1.5
+  group: Model Coeffs
+  variable: true
+  categorical: false
+b:
+  nominal_value: 2.0
+  bound:
+  - 1.0
+  - 3.0
+  group: Model Coeffs
+  variable: true
+  categorical: false
+c:
+  nominal_value: 2.5
+  bound:
+  - 0.0
+  - 5.0
+  group: Model Coeffs
+  variable: true
+  categorical: false
+d0:
+  nominal_value: 1.0
+  bound:
+  - 0.0
+  - 2.0
+  group: Tabular Params
+  variable: true
+  categorical: false
+d1:
+  nominal_value: 2.0
+  bound:
+  - 1.0
+  - 3.0
+  group: Tabular Params
+  variable: true
+  categorical: false
+d2:
+  nominal_value: 3.0
+  bound:
+  - 2.0
+  - 4.0
+  group: Tabular Params
+  variable: true
+  categorical: false
+e:
+  nominal_value: 1.0
+  bound:
+  - 0.0
+  - 2.0
+  group: Tabular Params
+  variable: true
+  categorical: false
+cont1:
+  nominal_value: 5.0
+  bound:
+  - 0.0
+  - 10.0
+  group: Inputs
+  variable: true
+  categorical: false
+cont2:
+  nominal_value: 2.5
+  bound:
+  - 0.0
+  - 5.0
+  group: Inputs
+  variable: true
+  categorical: false
+cat1:
+  nominal_value: 0.5
+  bound:
+  - 0.0
+  - 2.0
+  group: Inputs
+  variable: true
+  categorical: false
+cat2:
+  nominal_value: 1.0
+  bound:
+  - 0.0
+  - 3.0
+  group: Inputs
+  variable: true
+  categorical: false

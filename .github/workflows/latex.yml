@@ -1,0 +1,42 @@
+name: Compile LaTeX Paper
+
+on:
+  push:
+    branches:
+      - main
+      - master
+  pull_request:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 📥 Checkout repository
+        uses: actions/checkout@v3
+
+      - name: 🔧 Set up LaTeX environment
+        uses: teatimeguest/setup-texlive-action@v2
+        with:
+          packages: >-
+            latexmk
+            graphics
+            svg
+            tools
+            bibtex
+
+      - name: 🛠 Install required tools
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y inkscape python3 python3-pip
+          pip3 install cairosvg
+
+      - name: 🚧 Build paper
+        run: |
+          make
+
+      - name: 📤 Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: paper-pdf
+          path: paper_source/reemission.pdf
+

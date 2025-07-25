@@ -1,0 +1,237 @@
+## This file contains the definitions of uncertain parameters and inputs in the reemission model.
+
+# NOTE:
+# Standard deviations have been approximated from the values published G-res Tool Technical documentation
+# which provide slightly different values of regressions coefficients to those used in the G-res 
+# publication by Prairie et al. (2021).
+# Hence, these values should only be considered as `approximate` which is sufficient for the demonstration
+# of the utility of ReEmission to estimate parametric and input uncertainties in the underlying emission
+# models and probabilistic prediction of emissions.
+
+# REGRESSION MODEL COEFFICIENTS
+# k1_diff  :  (Constant) 1.860 paper / 1.79 tech. reference
+# k2_diff  :  (Age) -0.330 paper / -0.3364 tech. reference
+# k3_diff  :  (Effective temperature) 0.032 paper / 0.04 tech. reference
+# k4_diff  :  (Reservoir area) 0.0799 paper / 0.069 tech. reference
+# k5_diff  :  (Reservoir surface soil C content) 0.0155 paper / 0.0216 tech. reference
+# k6_diff  :  (TP) 0.2263 paper / 0.1472 tech. reference
+# k1_diff  :  (Constant) 0.8032 paper / 0.8804 tech. reference
+# k2_diff  :  (Age) -0.01419 paper / -0.011706 tech. reference
+# k3_diff  :  (Littoral area) 0.4594 paper / 0.6068 tech. reference
+# k4_diff  :  (Effective temperature) 0.04819 paper / 0.04828 tech. reference
+# k1_ebull : (Constant) -1.3104 paper / -0.986 tech. reference
+# k2_ebull : (Littoral area) 0.8515 papaer / 1.0075 tech. reference
+# k3_ebull : (Cumulative radiance) 0.05198 paper / 0.049 tech. reference
+# k1_degas : (Constant) -6.9106 paper / -5.503 tech. reference
+# k2_degas : (WRT) 0.6017 paper / 0.987 tech. reference
+# k3_degas : (integrated diffusive emissions) 2.9499679 paper / 2.286 tech. reference
+
+# 1. Regression equations for gross emission rates
+k1_diff_co2:
+  key_path: [CARBON_DIOXIDE, k1_diff]
+  name: k1_diff CO2
+  par_type: config
+  config_name: model_config
+  include: true
+  fixed: false
+  distribution:
+    type: real-normal
+    mean: 1.860
+    std_dev: 0.32
+  group: CO2 diffusion
+  metadata: null
+k2_diff_co2:
+  key_path: [CARBON_DIOXIDE, k2_diff]
+  name: k2_diff CO2
+  par_type: config
+  config_name: model_config
+  include: true
+  fixed: false
+  distribution:
+    type: real-normal
+    mean: -0.330
+    std_dev: 0.050
+  group: CO2 diffusion
+  metadata: null
+k3_diff_co2:
+  key_path: [CARBON_DIOXIDE, k3_diff]
+  name: k3_diff CO2
+  par_type: config
+  config_name: model_config
+  include: true
+  fixed: false
+  distribution:
+    type: real-normal
+    mean: 0.032
+    std_dev: 0.008
+  group: CO2 diffusion
+  metadata: null
+k4_diff_co2:
+  key_path: [CARBON_DIOXIDE, k4_diff]
+  name: k4_diff CO2
+  par_type: config
+  config_name: model_config
+  include: true
+  fixed: false
+  distribution:
+    type: real-normal
+    mean: 0.0799
+    std_dev: 0.031
+  group: CO2 diffusion
+  metadata: null
+k5_diff_co2:
+  key_path: [CARBON_DIOXIDE, k5_diff]
+  name: k5_diff CO2
+  par_type: config
+  config_name: model_config
+  include: true
+  fixed: false
+  distribution:
+    type: real-normal
+    mean: 0.0155
+    std_dev: 0.007
+  group: CO2 diffusion
+  metadata: null
+k6_diff_co2:
+  key_path: [CARBON_DIOXIDE, k6_diff]
+  name: k6_diff CO2
+  par_type: config
+  config_name: model_config
+  include: true
+  fixed: false
+  distribution:
+    type: real-normal
+    mean: 0.2263
+    std_dev: 0.06
+  group: CO2 diffusion
+  metadata: null
+k1_diff_ch4:
+  key_path: [METHANE, k1_diff]
+  name: k1_diff CH4
+  par_type: config
+  config_name: model_config
+  include: true
+  fixed: false
+  distribution:
+    type: real-normal
+    mean: 0.8032
+    std_dev: 0.15
+  group: CH4 diffusion
+  metadata: null
+k2_diff_ch4:
+  key_path: [METHANE, k2_diff]
+  name: k2_diff CH4
+  par_type: config
+  config_name: model_config
+  include: true
+  fixed: false
+  distribution:
+    type: real-normal
+    mean: -0.01419
+    std_dev: 0.002
+  group: CH4 diffusion
+  metadata: null
+k3_diff_ch4:
+  key_path: [METHANE, k3_diff]
+  name: k3_diff CH4
+  par_type: config
+  config_name: model_config
+  include: true
+  fixed: false
+  distribution:
+    type: real-normal
+    mean: 0.4594
+    std_dev: 0.07
+  group: CH4 diffusion
+  metadata: null
+k4_diff_ch4:
+  key_path: [METHANE, k4_diff]
+  name: k4_diff CH4
+  par_type: config
+  config_name: model_config
+  include: true
+  fixed: false
+  distribution:
+    type: real-normal
+    mean: 0.04819
+    std_dev: 0.006
+  group: CH4 diffusion
+  metadata: null
+k1_ebull_ch4:
+  key_path: [METHANE, k1_ebull]
+  name: k1_ebull CH4
+  par_type: config
+  config_name: model_config
+  include: true
+  fixed: false
+  distribution:
+    type: real-normal
+    mean: -1.3104
+    std_dev: 0.6
+  group: CH4 ebullition
+  metadata: null
+k2_ebull_ch4:
+  key_path: [METHANE, k2_ebull]
+  name: k2_ebull CH4
+  par_type: config
+  config_name: model_config
+  include: true
+  fixed: false
+  distribution:
+    type: real-normal
+    mean: 0.8515
+    std_dev: 0.23
+  group: CH4 ebullition
+  metadata: null
+k3_ebull_ch4:
+  key_path: [METHANE, k3_ebull]
+  name: k3_ebull CH4
+  par_type: config
+  config_name: model_config
+  include: true
+  fixed: false
+  distribution:
+    type: real-normal
+    mean: 0.05198
+    std_dev: 0.01
+  group: CH4 ebullition
+  metadata: null
+k1_degas_ch4:
+  key_path: [METHANE, k3_degas]
+  name: k1_degas CH4
+  par_type: config
+  config_name: model_config
+  include: true
+  fixed: false
+  distribution:
+    type: real-normal
+    mean: -6.9106
+    std_dev: 0.6
+  group: CH4 degassing
+  metadata: null
+k2_degas_ch4:
+  key_path: [METHANE, k2_degas]
+  name: k2_degas CH4
+  par_type: config
+  config_name: model_config
+  include: true
+  fixed: false
+  distribution:
+    type: real-normal
+    mean: 0.6017
+    std_dev: 0.2
+  group: CH4 degassing
+  metadata: null
+k3_degas_ch4:
+  key_path: [METHANE, k3_degas]
+  name: k3_degas CH4
+  par_type: config
+  config_name: model_config
+  include: true
+  fixed: false
+  distribution:
+    type: real-normal
+    mean: 2.9499679
+    std_dev: 0.27
+  group: CH4 degassing
+  metadata: null

@@ -1,0 +1,88 @@
+a:
+  include: true
+  fixed: false
+  distribution:
+    type: real-uniform
+    bounds: [0.5, 1.5]
+  group: Model Coeffs
+  metadata: null
+b:
+  include: true
+  fixed: false
+  distribution:
+    type: real-uniform
+    bounds: [1.0, 3.0]
+  group: Model Coeffs
+  metadata: null
+c:
+  include: true
+  fixed: false
+  distribution:
+    type: real-uniform
+    bounds: [0.0, 5.0]
+  group: Model Coeffs
+  metadata: null
+d0:
+  include: true
+  fixed: false
+  distribution:
+    type: real-uniform
+    bounds: [0.0, 2.0]
+  group: Tabular Params
+  metadata: null
+d1:
+  include: true
+  fixed: false
+  distribution:
+    type: real-uniform
+    bounds: [1.0, 3.0]
+  group: Tabular Params
+  metadata: null
+d2:
+  include: true
+  fixed: false
+  distribution:
+    type: real-uniform
+    bounds: [2.0, 4.0]
+  group: Tabular Params
+  metadata: null
+e:
+  include: true
+  fixed: false
+  distribution:
+    type: real-uniform
+    bounds: [0.0, 2.0]
+  group: Tabular Params
+  metadata: null
+cont1:
+  include: true
+  fixed: false
+  distribution:
+    type: real-uniform
+    bounds: [0.0, 10.0]
+  group: Inputs
+  metadata: null
+cont2:
+  include: true
+  fixed: false
+  distribution:
+    type: real-uniform
+    bounds: [0.0, 5.0]
+  group: Inputs
+  metadata: null
+cat1:
+  include: true
+  fixed: false
+  distribution:
+    type: discrete-uniform
+    bounds: [0.0, 2.0]
+  group: Inputs
+  metadata: null
+cat2:
+  include: true
+  fixed: false
+  distribution:
+    type: discrete-uniform
+    bounds: [0.0, 3.0]
+  group: Inputs
+  metadata: null
