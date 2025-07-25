@@ -22,21 +22,44 @@ jobs:
             latexmk
             graphics
             svg
+            tools
             bibtex
+            algorithms
+            listings
+            xcolor
+            adjustbox
+            booktabs
+            threeparttable
+            rotating
+            tablefootnote
+            acronym
+            refcount
+            xparse
 
       - name: 🛠 Install required tools
         run: |
           sudo apt-get update
           sudo apt-get install -y inkscape python3 python3-pip
           pip3 install cairosvg
+          
+      - name: 🧹 Clean previous build files
+        working-directory: paper_source
+        run: make clean || true
 
       - name: 🚧 Build paper
         working-directory: paper_source
         run: make
 
-      - name: 📤 Upload artifact
+      - name: 📤 Upload compiled PDF
         uses: actions/upload-artifact@v4
         with:
           name: paper-pdf
           path: paper_source/reemission.pdf
+
+      - name: 🐞 Upload LaTeX log on failure
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: latex-log
+          path: paper_source/reemission.log
 
