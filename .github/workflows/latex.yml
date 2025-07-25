@@ -35,6 +35,7 @@ jobs:
             acronym
             refcount
             xparse
+            soul
 
       - name: 🛠 Install required tools
         run: |
