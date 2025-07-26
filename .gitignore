@@ -477,3 +477,4 @@ internal_revisions/
 literature/
 paper_source/figures/src/
 code/outputs_and_intermediate/
+!paper_source/figures/*.pdf

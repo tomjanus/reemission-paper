@@ -247,7 +247,7 @@
 %%             country={}}
 %% \fntext[label3]{}
 
-\title{\emph{Re-Emission} - A free open-source software for estimating, reporting and visualizing greenhouse gas emissions from reservoirs}
+\title{\emph{Re-Emission}: A free open-source software for estimating, reporting, and visualizing greenhouse gas emissions from reservoirs}
 
 %% use optional labels to link authors explicitly to addresses:
  \author[label1]{Tomasz Janus}
@@ -281,16 +281,12 @@
 
 %% Abstract
 \begin{abstract}
-%Reservoirs collectively contribute approximately 1-2\% of total anthropogenic greenhouse gas emissions.
-%These broad impacts on the atmosphere and climate should be appropriately assessed and reported.
-Reservoirs are significant contributors to anthropogenic \ac{GHG} emissions whose broad impacts on the climate should be appropriately assessed and reported. 
-Yet, existing tools for estimating reservoir emissions are limited in their application, or require extensive data inputs which requires significant manual effort limiting their application to small numbers of reservoirs.
-Here, we present an open-source tool, \emph{Re-Emission}, which simplifies and streamlines reservoir emission modelling and enables estimation of emissions from regional and national scale reservoir inventories. 
-%The software can be extended with new modules; these may pertain to \ac{GHG} emissions estimation, but also other aspects of landscape-aquatic bio-geochemistry.
-We demonstrate the utility of our software on two practical case studies estimating emissions from $\sim$250 reservoirs.
-Our tool can be introduced into larger multi-domain frameworks to enable the use of reservoir emissions to support decision-making -- for example in water resources and energy planning.
-It integrates with a catchment analysis tool to provide automated reservoir emission assessments, removing the need for extensive user input -- a key barrier to a broader adoption of spatially-explicit emission models.
-%energy policy and hydropower development, especially in tropical regions, where the climate benefits of hydropower may be substantially less than previously assumed
+Reservoirs are significant contributors to anthropogenic \ac{GHG} emissions, whose broad impacts on the climate warrant appropriate assessment and reporting. 
+However, existing tools for estimating reservoir emissions are often limited in scope or require extensive input data and manual processing, restricting their application to small sets of reservoirs.
+Here, we present \emph{Re-Emission}, a free and open-source tool that streamlines the modelling of reservoir emissions, offers custom configuration options, and enables estimation at regional to national scales.  
+We demonstrate its utility through two case studies involving approximately 250 reservoirs.
+\emph{Re-Emission} can be integrated into broader multi-domain frameworks, supporting applications in domains such as water resources and energy planning. 
+It interfaces with a catchment analysis tool to automate reservoir emission assessments, eliminating the need for extensive user input -- a key barrier to a wider adoption of spatially-explicit emission models.
 \end{abstract}
 
 %%Graphical abstract
@@ -322,13 +318,14 @@ automated assessments \sep greenhouse gas emissions \sep reservoirs \sep open so
 \section{Introduction}
 \label{sec:introduction}
 
-Reservoirs are increasingly recognized as significant sources of biogenic \ac{GHG} emissions~\citep{Barros2011}, particularly in low-altitude tropical regions, where emission intensities (e.g., kg~CO$_{2e}$\,MWh$^{-1}$) of hydroelectric dams might exceed those of fossil fuel power plants~\citep{Fearnside2002}.
-The emissions arise from the decomposition of organic matter that was flooded during reservoir construction, transferred to the reservoir by river run-off, or grown in the reservoir such as by algal production~\citep{Louis2000}.
-Most recent estimates put their contribution globally at approximately 5.2\% of total anthropogenic \ac{CH4} emissions and 0.2\% of \ac{CO2} emissions; together equivalent to 1-2\% of total anthropogenic \ac{GHG} emissions~\cite{Soued2022}.
-The ongoing and planned investments in reservoir infrastructure worldwide are likely to hamper efforts to meet the Paris global climate change targets.
-In the hydroelectric sector alone, more than 3,700 dams are planned~\cite{Zarfl2015,Bouckaert2021} that could contribute approximately 400\,MtCO$_{2e}$ to global emissions annually~\cite{janus2025planning} -- equivalent to circa 11\% of the EU’s emissions. 
-Projections for planned reservoir investments from other sectors such as flood control and water supply are less known but likely to be substantial, due to a pressing need to close the growing water storage gap \cite{Yu2021} and improve the resilience of water resource systems to climatic uncertainty~\cite{ipcc2018, Sarkodie2022}.
-Given the potentially high \ac{GHG} fluxes (areal emissions) from reservoirs, rigorous estimation of emissions is needed (i) from planned reservoirs to design optimal low-carbon optimal expansion strategies and (ii) from existing reservoirs to provide more accurate estimates of the contribution of reservoir emissions to global emissions.
+Reservoirs are increasingly recognized as significant sources of biogenic \ac{GHG} emissions~\citep{Barros2011}, particularly in low-altitude tropical regions where the emission intensities of hydroelectric dams (e.g., kg~CO$_{2e}$\,MWh$^{-1}$) may exceed those of fossil fuel power plants~\citep{Fearnside2002}. 
+These emissions arise from the decomposition of organic matter that was either flooded during reservoir construction, transported into the reservoir by riverine runoff, or produced in situ through processes such as algal growth~\citep{Louis2000}.
+Recent estimates suggest that reservoirs contribute approximately 5.2\% of global anthropogenic \ac{CH4} emissions and 0.2\% of \ac{CO2} emissions, together accounting for 1-2\% of total anthropogenic \ac{GHG} emissions~\citep{Soued2022}.
+Ongoing and planned investments in reservoir infrastructure are likely to impede progress toward achieving the climate targets set by the Paris Agreement.
+In the hydroelectric sector alone, more than 3,700 new dams are planned~\citep{Zarfl2015,Bouckaert2021}, potentially adding approximately 400\,MtCO$_{2e}$ annually to global emissions~\citep{janus2025planning} -- an amount equivalent to around 11\% of the European Union’s current emissions.
+Projections for planned reservoir investments in sectors such as flood control and water supply are less well known but are likely to be substantial, driven by efforts to enhance the resilience of water resource systems to climatic uncertainty~\cite{ipcc2018, Sarkodie2022}.
+Given the potentially high areal \ac{GHG} fluxes from reservoirs, rigorous emission estimation is needed both (i) for planned reservoirs, to enable the design of low-carbon expansion strategies, and (ii) for existing reservoirs, to improve the accuracy of global \ac{GHG} inventories.
+
 
 %Although several estimates of the total number and total area of reservoirs worldwide have been constructed, contemporary advances in remote sensing and global hydrological mapping have considerably increased our understanding of their true extent and distribution.
 %\citet{Downing2006} estimated the number of impoundments globally at 515,149 with a total area of 258,570~km$^2$
@@ -338,22 +335,18 @@ Given the potentially high \ac{GHG} fluxes (areal emissions) from reservoirs, ri
 %Given the likely exclusion of numerous existing reservoirs with unquantified atmospheric impacts, current global emission estimates may require reassessment to account for these new contributions.
 
 Several studies have addressed the methodological challenges of quantifying reservoir emissions and have provided estimates of \ac{GHG} emissions from existing reservoirs at both global~\citep{Barros2011, Soued2022, Deemer2016, Prairie2018, Harrison2021} and regional scales~\citep{Hidrovo2017, Rasanen2018, Almeida2019, Hansen2022}. 
-These studies have shown that emissions are shaped by a multitude of hydro-morphological, edaphic, climatic, and land-use characteristics of reservoirs and their catchments~\citep{Deemer2016, Prairie2021}.
-%, thereby necessitating the use of comprehensive emission models for accurate site-specific assessments. 
-Nevertheless, current global estimates, including the most recent~\citep{Harrison2021, Soued2022} relied on empirical flux approximations derived from a limited number of measured sites, rather than on application of spatially explicit emission models to individual reservoirs to individual reservoirs. 
-Such approaches cannot capture the variability in emission fluxes driven by site-specific environmental conditions and reservoir properties~\cite{janus2025planning}, which in turns might impair the reliability of global assessments 
-%(e.g.,~\citep{Harrison2021, Soued2022})
-and strategic planning efforts. % (e.g.,~\cite{Almeida2019, Carlino2024, Tangi2024}).
-Moreover, the underlying measurement data used for upscaling tend to be skewed toward large, deep, hydroelectric reservoirs~\cite{Hansen2022}, thereby underrepresenting small reservoirs~\citep{Malerba2022} which are often shallow, and typically rich in organic matter -- conditions that are conducive to elevated methane production~\citep{WANG2025123441, SHI2025}. 
-Hence, the global \acp{EF} derived in recent assessments~\citep{Harrison2021, Soued2022} might underestimate emissions from small, shallow reservoirs, such as those used for irrigation and introduce biases into global reservoir assessments.
+These studies have shown that emissions are shaped by a complex interplay of hydro-morphological, edaphic, climatic, and land-use characteristics of reservoirs and their catchments~\citep{Deemer2016, Prairie2021}.
+Nevertheless, current global assessments, including the most recent~\citep{Harrison2021, Soued2022}, rely on empirical flux approximations derived from a limited number of measured sites, rather than on the application of spatially explicit emission models to individual reservoirs.
+Such approaches are unable to capture the variability in emission fluxes driven by site-specific environmental conditions and reservoir properties~\citep{janus2025planning}, which in turn may undermine the reliability of global emission inventories and strategic planning efforts. 
+Moreover, the underlying measurement data used for upscaling are typically biased toward large, deep hydroelectric reservoirs~\citep{Hansen2022}, underrepresenting small, shallow reservoirs~\citep{Malerba2022} -- which are often rich in organic matter and more conducive to elevated methane production~\citep{WANG2025123441, SHI2025}. 
+As a result, the global \acp{EF} derived in recent assessments~\citep{Harrison2021, Soued2022} may underestimate emissions from small, shallow reservoirs such as those used for irrigation, thereby introducing bias into global reservoir emission estimates.
 
 A major barrier to addressing the challenges outlined above is the lack of software capable of estimating reservoir emissions at national, regional, and global scales using the most up-to-date emission models that go beyond Tier~1 \acf{EF} approaches and basic upscaling techniques.
-The most comprehensive and widely recognized model for estimating reservoir \ac{GHG} emissions is the G-res model~\cite{Prairie2017b, Prairie2021}, which provides spatially explicit estimates of gross and net emissions by accounting for both anthropogenic and natural sources, as well as a wide range of climatic, hydro-morphological, edaphic, and land-use drivers.
-The model is supported by a publicly available web-based platform, the G-res Tool~\cite{prairie2017gres}, which offers free emission assessments for non-commercial users and a paid service for commercial applications.
-However, the G-res Tool is primarily intended for single-reservoir assessments and lacks functionality for large-scale or batch analyses.
-It requires considerable manual effort to input site-specific data, and as a web-based platform with a fixed interface, it cannot be readily automated for large-scale assessments involving multiple reservoirs.
-Furthermore, the tool is closed-source and offers limited potential for customization.
-As such, it is not well-suited for advanced applications such as stochastic modelling, strategic planning, or extensions that incorporate custom emission models.
+The most comprehensive and widely recognized model for estimating reservoir \ac{GHG} emissions is the G-res model~\citep{Prairie2017b, Prairie2021}, which provides spatially explicit estimates of both gross and net emissions by accounting for anthropogenic and natural sources, as well as a broad range of climatic, hydro-morphological, edaphic, and land-use drivers.
+G-res is implemented through a publicly available web-based platform, the G-res Tool~\citep{prairie2017gres}, which offers free assessments for non-commercial users and paid services for commercial applications.
+However, the G-res Tool is primarily designed for single-reservoir assessments and lacks functionality for large-scale or batch processing.
+It requires substantial manual input of site-specific data and, as a web-based tool with a fixed interface, cannot be easily automated for large-scale applications involving multiple reservoirs.
+Moreover, the tool is closed‑source and its customization options are limited, which may constrain its use in advanced applications such as stochastic modelling, strategic planning, or incorporating custom sub‑models.
 
 %The development of a free open-source alternative could offer the following benefits: (i) direct use of complete emission models, instead of upscaling methods, may help removing potential biases in global estimates and improve the accuracy of emission estimates for individual reservoirs, (ii) they will enable a more precise estimation of emissions from reservoirs whose characteristics fall outside the range of values represented in the measurement data sets (iii) they will enable an easier transition from Tier~1 may not be adequate to represent emission rates in different regions as well as different reservoir morphologies into more methodological methods without imposing significant overheads in terms of costs and time, (iv) 
 
@@ -363,13 +356,17 @@ As such, it is not well-suited for advanced applications such as stochastic mode
 %However, these databases a rather high estimate for total area\,km$^2$ -- ~480,000 in GOOD2.
 %Shows that missing data is for small reservoirs ...
 
-Here, we introduce \textit{Re-Emission} -- a free, open-source software for estimating, visualizing, and reporting \ac{GHG} emissions from reservoirs. 
-%It provides a flexible framework for integrating emission assessments into water resources and energy planning workflows. 
-\textit{Re-Emission} allows for unrestricted use of the state-of-the-art G-res model and, owing to its open-source nature, supports modifications and extensions to accommodate new datasets, (sub)models, parameters and other additions to suit various project-specific purposes. 
-Written in Python -- a popular language in the scientific and engineering communities -- \textit{Re-Emission} can be easily integrated into larger projects such as assessment and planning frameworks.
-Through integration with the upstream reservoir and catchment processing tool GeoCARET~\cite{heettool}, it enables automated estimation of regional and national inventories of dams using spatially explicit models, thus moving away from Tier~1 approximations, as recommended in the IPCC guidelines~\cite{IPCC2019}.
+Here, we introduce \textit{Re-Emission} -- a free open-source software tool for estimating, visualizing, and reporting \ac{GHG} emissions from reservoirs. 
+\textit{Re-Emission} provides unrestricted access to the state-of-the-art G-res model and, owing to its open-source design, supports modifications and extensions to incorporate new datasets, sub-models, parameters, and other project-specific requirements. 
+Implemented in Python -- a widely used language in the scientific and engineering communities -- \textit{Re-Emission} can be readily integrated into broader modelling or planning frameworks. 
+Through integration with the upstream reservoir and catchment processing tool GeoCARET~\citep{heettool}, it enables automated estimation of regional- to national-scale emission inventories using spatially explicit models, thus advancing beyond Tier~1 approximations, in line with recommendations from the IPCC~\citep{IPCC2019}.
 
-This paper is structured as follows: (i) we begin by reviewing past developments in reservoir emission modelling and the associated software tools, highlighting the gaps in existing approaches and how our \textit{Re-Emission} fits within this broader landscape; (ii) we provide a high-level overview of the software architecture, including its main components and capabilities; (iii) we describe key features of the tool, including its dual use as a Python library and \ac{CLI}, configuration options, supported input and output data formats, and emission reporting functionalities; (iv) we demonstrate an optional execution method via Docker and integration with GeoCARET~\cite{heettool} -- a command line tool written in Python for delineating and analysing catchments and reservoirs utilizing Google Earth Engine's cloud computing and cloud assets~\cite{Gorelick2017}; and (v) we present two use cases that illustrate the practical utility of \textit{Re-Emission} in real-world applications in estimating emissions from ~250 reservoirs in Myanmar, Scotland, and Wales.
+This paper is structured as follows.
+First, we review previous developments in reservoir emission modelling and the associated software tools, highlighting gaps in existing approaches and positioning \textit{Re-Emission} within this broader landscape.
+Second, we provide a high-level overview of the software architecture, describing its main components and capabilities.
+Third, we outline key features of the tool, including its dual use as a Python library and a \ac{CLI}, available configuration options, supported input and output data formats, and emission reporting functionalities.
+Fourth, we demonstrate an optional execution method via Docker and integration with GeoCARET~\cite{heettool} -- a command-line tool written in Python for delineating and analysing catchments and reservoirs using Google Earth Engine's cloud computing platform and assets~\cite{Gorelick2017}. 
+Finally, we present two use cases that illustrate the practical utility of \textit{Re-Emission} in real-world applications, estimating emissions from approximately 250 reservoirs in Myanmar and the United Kingdom.
 
 %% Add \usepackage{lineno} before \begin{document} and uncomment 
 %% following line to enable line numbers
@@ -378,101 +375,84 @@ This paper is structured as follows: (i) we begin by reviewing past developments
 \section{A Review of Reservoir Emission Models and Tools}
 \label{sec:related_work}
 
-Quantification of \ac{GHG} emissions from reservoirs has evolved substantially. 
-Initially dominated by studies constructing \ac{GHG} emissions from empirical \ac{GHG} measurements (e.g.\cite{Louis2000, dosSantos2006, GalyLacaux2006}), the field has progressively incorporated various modelling techniques, from simple univariate regressions~\cite{Barros2011, Huttunen2006, unesco_iha_ghg_2010, ghg_risk_tool_manual} to more complex statistical and machine learning approaches~\cite{Beaulieu2020b, WANG2025123441}, and more elaborate process-based (mechanistic) models~\cite{Berger2014, Lomov2024, Delwiche2022, Wu2022, Zhuang2023, Tan2024, SHI2025}.
-The studies range from detailed investigations of \ac{GHG} emissions and underlying processes in individual reservoirs (e.g.,~\cite{gruca2011, Berger2014}) to large-scale assessments of global estimates of reservoir emissions (e.g.,~\cite{Louis2000, Deemer2016, Harrison2021, Soued2022}).
+Quantification of \ac{GHG} emissions from reservoirs has evolved substantially. Initially dominated by empirical \ac{GHG} measurements (e.g., \cite{Louis2000, dosSantos2006, GalyLacaux2006}), the field has incorporated a variety of modelling techniques ranging from simple univariate regressions~\cite{Barros2011, Huttunen2006, unesco_iha_ghg_2010, ghg_risk_tool_manual} to advanced statistical and machine learning approaches~\cite{Beaulieu2020b, WANG2025123441}, as well as detailed process-based (mechanistic) models~\cite{Berger2014, Lomov2024, Delwiche2022, Wu2022, Zhuang2023, Tan2024, SHI2025}. 
+Studies span from in-depth analyses of \ac{GHG} emissions and mechanisms in individual reservoirs (e.g.,~\cite{gruca2011, Berger2014}) to large-scale global emission assessments (e.g.,~\cite{Louis2000, Deemer2016, Harrison2021, Soued2022}).
 
-Global assessments have employed available emission measurements and upscaled them to unmeasured reservoirs -- initially using univariate regressions against parameters such as productivity~\cite{Deemer2016}, latitude, or age, and later, more sophisticated multivariate statistical frameworks (notably equations from the G-res model~\cite{Prairie2017b, Prairie2021}) to upscale emissions via individual emission pathways~\cite{Harrison2021, Soued2022}.
-The global emission estimates derived via upscaling were subsequently used to calculate emission factors, i.e. coefficients representing average gross annual emission fluxes as a function of reservoir's latitude \citep{Harrison2021} or biome \citep{Soued2022}.
-These emission factors have been used recently to estimate emissions from existing and planned hydroelectric reservoirs later incorporated as a selection criterion in strategic hydropower planning frameworks~\cite{Almeida2019, Carlino2024, Tangi2024}.
-% , either via different pathways or combined,
+Global assessments have upscaled available emission measurements -- initially using univariate regressions against parameters like productivity~\cite{Deemer2016}, latitude, or age, and later more sophisticated multivariate frameworks (notably the G-res model~\cite{Prairie2017b, Prairie2021}) -- to estimate emissions via individual pathways~\cite{Harrison2021, Soued2022}. 
+These estimates yielded \acfp{EF} representing average gross annual fluxes as functions of latitude~\cite{Harrison2021} or biome~\cite{Soued2022}. 
+These \acp{EF} have been recently applied to estimate emissions from existing and planned hydroelectric reservoirs in strategic hydropower planning~\cite{Almeida2019, Carlino2024, Tangi2024}.
 
-The more detailed, mainly empirical investigations, were focused on measuring and understanding \ac{GHG} emissions from reservoirs; these contributions have collectively enabled more comprehensive assessment of global reservoir emissions, but also considerately advanced capacities to develop process understanding across reservoirs.
-A simple example is the inclusion of degassing emissions from hydropower reservoirs operating deep-water off-takes, which can constitute up to 89\% of total emissions~\cite{Soued2020exp}.
-In parallel with efforts to improve mechanistic understanding of emission processes, increased awareness of data paucity in certain environmental contexts -- such as small reservoirs, which have historically been under-represented due to the prevailing focus on large, deep hydroelectric systems (e.g.,\cite{Barros2011, GalyLacaux2006, Delwiche2022, Tremblay2004}) -- has motivated recent studies targeting these previously under-monitored systems~\cite{Naslund2024}.
+More detailed, mainly empirical, investigations have focused on measuring and understanding reservoir \ac{GHG} emissions, advancing process understanding. 
+A simple example is the inclusion of degassing emissions from hydropower reservoirs operating deep-water off-takes, which can constitute up to 89\% of total emissions~\cite{Soued2020exp}. 
+Awareness of data gaps, especially for small reservoirs historically underrepresented due to emphasis on large hydroelectric systems (e.g.,~\cite{Barros2011, GalyLacaux2006, Delwiche2022, Tremblay2004}), has motivated recent studies targeting these overlooked systems~\cite{Naslund2024}.
 
-The above studies enhanced our understanding of the complex dynamics governing reservoir emissions and identified  
-major knowledge gaps still present in our understanding -- particularly the dynamic response of emissions to changing conditions such as drawdown zones~\cite{Barbosa2024}, water level fluctuations and algal blooms~\cite{Liao2024-ct}.
-Beyond these knowledge gaps, considerable uncertainty remains regarding the long-term carbon sequestration potential of reservoirs, particularly through sedimentary burial of catchment-derived organic matter, which may not be fully accounted for in conventional system-level gas balance assessments.
-Furthermore, there is still insufficient data from reservoirs in some regions of the world -- particularly downstream and sediment-derived methane emissions, and emissions from small (e.g. irrigation) reservoirs with large littoral zones relative to surface area that are typically found to be hotspots for \ac{CH4} emissions.
-These and other, often yet-to-be-identified, knowledge gaps contribute to substantial uncertainty in global greenhouse gas emission estimates and limit the predictive accuracy of modelling frameworks.
+These studies improved understanding of the complex dynamics governing emissions but also identified key knowledge gaps, particularly the dynamic response to changing conditions such as drawdown zones~\cite{Barbosa2024}, water level fluctuations, and algal blooms~\cite{Liao2024-ct}. 
+Considerable uncertainty remains on reservoirs' long-term carbon sequestration, especially sedimentary burial of catchment organic matter, which may be underrepresented in conventional gas balance assessments. 
+Additionally, insufficient data exists for some regions, particularly on downstream and sediment-derived methane emissions and from small reservoirs (e.g., irrigation), which often have large littoral zones that are hotspots for \ac{CH4} emissions. 
+These and other gaps contribute substantial uncertainty to global \ac{GHG} estimates and limit modelling accuracy.
 
-Consequently, the availability of practically-relevant emission models for assessing reservoir carbon budgets -- particularly the anthropogenic component of these emissions -- remains limited. 
-To date, the only widely recognized model with such practical utility is the G-res model developed by UNESCO/IHA~\cite{Prairie2017b, Prairie2021}. 
-Other models reported in the literature, including statistical regression and \ac{ML} - based approaches, exhibit limited predictive accuracy at the individual reservoir scale~\cite{Hansen2022} and have predominantly been used for upscaling or coarse approximation tasks. 
-At the opposite end of the complexity spectrum, mechanistic models have typically focused on a single gas (e.g.,~\cite{Wu2022, Lomov2024}) or emission pathway (e.g.,~\cite{Berger2014}), and often require highly detailed input data, such as reservoir bathymetry or hydrodynamic conditions. 
-These requirements can pose significant practical and computational challenges, limiting their applicability in broad-scale assessments. Instead, such models are more suitable for detailed scientific investigations, for instance, exploring emission responses to hydrological fluctuations or dam operational regimes or spatial variability in areal emission rates within reservoirs.
+Consequently, practically relevant emission models for assessing reservoir carbon budgets -- particularly the anthropogenic component -- remain scarce. 
+The only widely recognized model with practical utility is the G-res model by UNESCO/IHA~\cite{Prairie2017b, Prairie2021}. 
+Other reported models, including statistical regression and \ac{ML}-based methods, show limited predictive accuracy at the individual reservoir scale~\cite{Hansen2022} and are mainly used for upscaling or coarse approximations. 
+At the complex end, mechanistic models typically focus on a single gas (e.g.,~\cite{Wu2022, Lomov2024}) or pathway (e.g.,~\cite{Berger2014}) and require detailed inputs such as bathymetry or hydrodynamics, posing practical and computational challenges that limit their broad applicability. 
+Such models are better suited for detailed investigations of emission responses to hydrological fluctuations, dam operations, or spatial variability within reservoirs.
 
-Here, we provide a brief examination of major advancements in reservoir emission modelling reported in the scientific literature over the past 25 years and categorized by methodological approach and application context. 
-The chronology of these studies is given in Table~\ref{tab:reservoir_models}.
+Here, we briefly examine key advances in reservoir emission modelling over the past 25 years, categorized by methodological approach and application context. 
+A chronological summary is provided in Table~\ref{tab:reservoir_models}.
 
-\subsection{Empirical models (2000-present)}
+\subsection{Empirical models (2000--present)}
 \label{subsec:empirical_models}
-The first attempts to quantify reservoir \ac{GHG} emissions relied primarily on empirical approaches. 
-Early work by \citet{Louis2000} established emission factors based on direct measurements, providing the first global-scale estimates of reservoir emissions. 
-\citet{Barros2011} identified a significant negative correlation between reservoir age and emissions that was later introduced into more elaborate emission models (see G-res~\cite{Prairie2017b, Prairie2021}).
-These studies typically derived regression equations from field measurements, which were then applied to estimate emissions at larger scales or in similar systems.
-Empirical models are characterized by their simplicity and direct relationship to field measurements, but are limited by their inability to account for the complex processes driving emissions and their spatial and temporal variability. 
-Nevertheless, they established the foundation for further model development and highlighted the significant contribution of reservoirs to global \ac{GHG} budgets.
-Emission factors, originally introduced by \citet{Louis2000} and subsequently updated with new measurements and upscaling methods, are used by the IPCC as the recommended Tier~1 approach for estimating reservoir emissions, as outlined in the ``2019 Refinement to the 2006 \acs{IPCC} Guidelines for National Greenhouse Gas Inventories: Wetlands''~\cite{IPCC2019}.
 
-\subsection{Process-based models (2004-present)}
+Early \ac{GHG} quantification relied mainly on empirical methods. 
+\citet{Louis2000} pioneered emission factors based on direct measurements, providing the first global estimates. 
+\citet{Barros2011} identified a significant negative correlation between reservoir age and emissions, later incorporated in models such as G-res~\cite{Prairie2017b, Prairie2021}. 
+Typically, these models derive regressions from field data and extrapolate emissions to larger scales or similar systems. 
+While simple and directly tied to measurements, empirical models cannot capture complex processes or spatiotemporal variability, but established the foundation for further developments and highlighted reservoirs’ global \ac{GHG} significance. 
+Emission factors from \citet{Louis2000} and subsequent updates form the IPCC's recommended Tier~1 method for reservoir emissions in the ``2019 Refinement to the 2006 \acs{IPCC} Guidelines for National Greenhouse Gas Inventories: Wetlands''~\cite{IPCC2019}.
+
+\subsection{Process-based models (2004--present)}
 \label{sec:process_models}
-Process-based models represent a significant advancement in reservoir emission modelling by incorporating underlying biogeochemical and physical processes of \ac{GHG} synthesis, transformation, and emission.
-The \ac{GHG} model by \citet{Tremblay2004} was among the first to quantify emissions from the decomposition of flooded biomass and soil carbon.
-Subsequent developments incorporated different \ac{GHG} synthesis and emission models, e.g. sediment diagenesis \cite{Berger2014}, \ac{CO2} diffusion \cite{Wu2022}, and \ac{CH4} diffusive and ebullition fluxes \citep{Lomov2024} into hydrodynamic hydraulic and water quality models such as CE-QUAL-W2 \citep{Berger2014, Wu2022} and LAKE 2.3 \citep{Lomov2024}.
-Most recently, \citet{SHI2025} developed a process-based C-GHG module within the \ac{EFDC} hydrodynamic model \cite{hamrick1992} that describes multiple physical and biogeochemical processes -- including heterotrophic respiration, \ac{CO2} fractionation, sediment methanogenesis, \ac{CH4} ebullition, and \ac{CH4} oxidation -- allowing simulation of spatio-temporal variations of \ac{GHG} emissions from reservoirs in three dimensions.
-These models typically require extensive parameterization but provide a mechanistic and often dynamic representation of emission processes, making them readily integrable into dynamic mass transport models such as hydraulic models of rivers and lakes.
 
-\subsection{Statistical and \ac{ML} approaches (2011-present)}
-Statistical approaches to reservoir emission modelling began with univariate regression models \cite{Barros2011} that related \ac{CO2} and \ac{CH4} fluxes to reservoir's age and latitude. 
-These evolved into more sophisticated machine learning techniques, with \citet{Beaulieu2020b} pioneering the application of \acp{BRT} to predict \ac{CH4} emissions from global reservoirs -- later also adopted in \cite{Rocher-Ros2023}.
-The machine learning paradigm has expanded to include artificial neural networks \cite{Yang2018, chen2018} and other \ac{ML} approaches such as \ac{KNN}, \ac{SVR} and \ac{RF} \cite{WANG2025123441}.
-These data-driven approaches excel at identifying complex, non-linear relationships between environmental variables and emissions, though they usually lack the physical interpretability of process-based models and do not generalize well to unseen data.
-For this reason, they are useful as surrogate models, particularly for interpolation tasks such as upscaling (see, e.g., \cite{Beaulieu2020b}). 
-However, they are not well suited as general tools for assessing emissions from individual reservoirs, which require interpretability of results and the ability to extrapolate reliably to reservoirs with unique properties outside the dataset used for model calibration.
+Process-based models represent a step forward by simulating biogeochemical and physical processes underlying \ac{GHG} synthesis, transformation, and emission. 
+\citet{Tremblay2004} quantified emissions from decomposing flooded biomass and soil carbon. 
+Subsequent models incorporated sediment diagenesis \cite{Berger2014}, \ac{CO2} diffusion \cite{Wu2022}, and \ac{CH4} diffusive and ebullition fluxes \citep{Lomov2024} into hydrodynamic and water quality models such as CE-QUAL-W2 \citep{Berger2014, Wu2022} and LAKE 2.3 \citep{Lomov2024}. 
+Most recently, \citet{SHI2025} developed a C-GHG module within \ac{EFDC} \cite{hamrick1992} simulating multiple physical and biogeochemical processes in three dimensions, including heterotrophic respiration, \ac{CO2} fractionation, sediment methanogenesis, and \ac{CH4} ebullition and oxidation. 
+Though requiring extensive parameterization, these models offer mechanistic, dynamic emission representations suitable for integration into river and lake transport models.
 
-\subsection{Multimechanism comprehensive emission models (2016-present)}
+\subsection{Statistical and \ac{ML} approaches (2011--present)}
+
+Statistical modelling began with univariate regressions relating \ac{CO2} and \ac{CH4} fluxes to reservoir age and latitude \cite{Barros2011}, evolving to machine learning (ML) techniques such as boosted regression trees \cite{Beaulieu2020b}, artificial neural networks \cite{Yang2018, chen2018}, and other ML algorithms like \ac{KNN}, \ac{SVR}, and \ac{RF} \cite{WANG2025123441}. 
+These data-driven models excel at capturing complex, nonlinear relationships but often lack physical interpretability and do not generalize well to unseen reservoirs. 
+They are useful as surrogates for interpolation and upscaling~\cite{Beaulieu2020b} but less suited for assessing individual reservoirs where interpretability and reliable extrapolation are critical.
+
+\subsection{Multimechanism emission models (2016--present)}
 \label{sec:multimechanism_models}
 
-An alternative to simple univariate and multivariate regression-based models -- which often lack the complexity needed to estimate emissions across diverse reservoir types -- and to process-based simulation models that are computationally intensive and require extensive input data, is the multi-mechanism G-res model~\cite{Prairie2017b, Prairie2021}, developed by the \ac{IHA} and the UNESCO Chair in Global Environmental Change.
+Multi-mechanism models offer a middle ground between simple regressions and data-intensive process-based models. 
+The G-res model~\cite{Prairie2017b, Prairie2021} developed by UNESCO/IHA combines statistical relationships, empirical data, and mechanistic equations to comprehensively assess reservoir \ac{GHG} emissions. 
+Derived from over 200 reservoirs worldwide, it accounts for multiple emission pathways (diffusive, bubbling, degassing) and supports diverse input variables describing reservoirs, catchments, and climate. 
+Notably, it quantifies both pre- and post-impoundment emission balances, enabling estimates of net anthropogenic \ac{GHG} footprints.
+Currently, no comparable publicly available frameworks exist, though emerging process-based models like \citet{SHI2025} may enable more comprehensive future assessments, particularly under climate, hydrological variability, and reservoir operation on emission dynamics.
 
-G-res represents a significant advancement in the modelling of reservoir \ac{GHG} emissions over previous methodologies by combining several statistical relationships, tabular data, and empirical and mechanistic equations to provide a comprehensive and detailed assessment framework.
-The statistical relationships are derived from empirical studies on \ac{GHG} fluxes as a function of site-specific variables such as latitude, age, flooded soil carbon content, etc. from over 200 reservoirs worldwide and can be used to evaluate emissions from existing as well as planned reservoirs.
-G-res accounts for multiple emission pathways (diffusive, bubbling, and degassing) and supports multiple input variables characterizing the reservoir, the catchment, and the local climate.
-A key feature of the tool is its ability to calculate both pre- and post-impoundment emission balances, thereby enabling a quantification of the reservoir's net anthropogenic \ac{GHG} footprint.
-
-At present, no alternative frameworks to G-res are publicly available. 
-However, more complex process-based models, such \citet{SHI2025} may enable more comprehensive assessments of reservoir \ac{GHG} emissions in the near future. 
-These models are particularly promising for studies evaluating the effects of climate change, hydrological variability, and reservoir operation on emission dynamics.
-
-%The G-res Tool represents a significant advancement in accessibility, providing a web-based interface for reservoir emission assessment.
-%The tool is publicly accessible via a web-based platform, significantly lowering the barrier to entry for practitioners seeking to evaluate emissions from existing or planned reservoirs. 
-%However, the tool requires significant data input or \ac{GIS} analysis to determine emissions while lacking estimation of \ac{N2O} emissions.
-%Building on the G-res model, this paper offers a simple approach using the location and height of a potential hydro dam to derive a broad suite of catchment and reservoir parameters for the proposed dam.
-%These hydro-morphological parameters are then used to estimate potential \ac{GHG} emissions trajectories over a 100-year time period based on their predictive relationships between catchment/reservoir parameters and emissions.
-
-\subsection{Software and source code availability for reservoir emission modelling}
+\subsection{Availability of software for reservoir emission modelling}
 \label{subsec:software_and_code}
 
-The number of software tools supporting reservoir \ac{GHG} emission modelling is small despite research interest and potentially significant practical benefits resulting from application of emission models. % to studies such as environmental assessments or low-carbon investment planning.
-While several models have been developed to date, only a few are accompanied with software implementations that allow their immediate uptake by practitioners.
+Despite research interest and practical benefits, software supporting reservoir \ac{GHG} emission modelling remains scarce. 
+Few models have accompanying software for immediate practitioner use.
 
-Among the available tools, the G-res Tool~\citep{prairie2017gres, Prairie2017b} stands out as the most practitioner-oriented solution. 
-It features a user-friendly, web-based interface tailored for hydropower developers and environmental consultants. 
+The G-res Tool~\citep{prairie2017gres, Prairie2017b} stands out as the most practitioner-oriented solution, featuring a web interface tailored for hydropower developers and environmental consultants. 
 The tool implements the G-res model, enabling users to estimate net anthropogenic \ac{GHG} emissions from reservoirs without necessitating any field measurements~\citep{Prairie2021}. 
-The tool is operated manually via a web-browser, precluding automation such as batch analyses, and coupling to catchment analysis tools that can automate data retrieval from databases or from cloud based \ac{GIS} and computing resources such as e.g., Google Earth Engine~\cite{Gorelick2017}.
-According to the G-res Tool's Terms and Conditions (April 2019), the G-res Tool is free of charge for  non-commercial and commercial use, however formal publication of results requires review and certification by the G-res team and incurs a fixed cost per reservoir.
+However, it requires manual operation via a web browser, precluding automation such as batch analyses, and coupling to catchment analysis tools that can automate data retrieval from databases or from cloud based \ac{GIS} and computing resources such as e.g., Google Earth Engine~\cite{Gorelick2017}.
+The tool is free for commercial and non-commercial use but mandates G-res team review and fees for formal publication of results.
 
-Process-based (mechanistic) models, such as those built upon CE-QUAL-W2~\citep{Berger2014} and \acf{EFDC}~\citep{SHI2025} are typically embedded within larger environmental modelling frameworks, limiting their standalone applicability for routine assessments. 
-Furthermore, some of these tools remain closed-source or proprietary. 
-For instance, while the \ac{EFDC}~\cite{hamrick1992} is distributed by the \ac{EPA} free of charge, it is a legacy model without user support and it is only provided in executable binary format for Windows 95/98/NT/2K/XP -- the source code is not available.
-The LAKE 2.0 model adopted in \cite{Lomov2024} is only available upon request from the author~\cite{Stepanenko2016} but seems to be shared in a source-code form and support multiple operating systems.
-CE-QUAL-W2 upon which the work of \citet{Berger2014} and \citet{Wu2022} is based, is free and open source under the permissive MIT license.
+Mechanistic models such as CE-QUAL-W2~\citep{Berger2014} and \ac{EFDC}~\citep{SHI2025} typically operate within broader environmental modelling frameworks, limiting routine standalone assessments. 
+Some remain proprietary or closed-source. 
+For example, \ac{EFDC}~\cite{hamrick1992} is a legacy EPA model distributed as Windows executables without source code or support. 
+LAKE 2.0~\citep{Lomov2024} is available upon request in source code form and supports multiple operating systems~\citep{Stepanenko2016}. 
+CE-QUAL-W2, underpinning \citet{Berger2014} and \citet{Wu2022}, is free and open-source under the MIT license.
 
-Overall, the limited availability of open-source and accessible tools capable of supporting routine assessments of the impacts of reservoirs on the atmosphere highlights a significant gap in the current software ecosystem. 
-This gap underscores the need for the development of open-source, customizable, and integrable tools that can bridge the divide between research-grade models and software suitable for and addressing the needs of practitioners. 
-Filling this gap is also essential for facilitating the integration of \ac{GHG} emission assessments into larger frameworks -- for example for low-carbon reservoir planning, which currently rely on simpler and less accurate Tier~1 methods~\cite{Almeida2019, Carlino2024, Tangi2024}.
+Overall, the limited availability of open, accessible software capable of routine reservoir \ac{GHG} assessments highlights a critical gap. 
+Addressing this gap is vital to bridge research-grade models and practitioner tools, enabling integration of emission assessments into broader frameworks, such as low-carbon reservoir planning, that currently rely on Tier~1 methods~\cite{Almeida2019, Carlino2024, Tangi2024}.
 
 \begin{sidewaystable}[htbp]
 \footnotesize
@@ -534,23 +514,24 @@ features and chemical status & Global & -- & \citet{Barros2011} \\
 \begin{figure}[ht]
     \centering
     \includegraphics[width=0.99\textwidth]{figures/high_level_achitecture.pdf}
-    \caption{Software architecture of the Re-Emission package. \textbf{a}, Container-level interactions showing key components, their functionalities, and data flow between system elements. Users can interact with the \acf{CLI} or Python library to orchestrate the loading of configuration parameters and input data, executes the core emission models, and generate output reports in various formats (Excel, JSON, PDF, HTML). Configuration files provide model parameters and presentation options for report and output files, while the file system stores inputs and outputs. \textbf{b}, Package dependency view illustrating the modular structure and inter-package relationships within the system architecture.}
+	\caption{Architecture of \textit{Re-Emission}. \textbf{a}, Container-level interactions showing key components, their functionalities, and data flow between system elements. Users can interact with the \acf{CLI} or Python library to load configuration parameters and input data, run the core emission models, and generate reports in multiple formats (Excel, JSON, PDF, HTML). Configuration files specify model parameters and presentation settings for the outputs, while the file system manages input and output storage. \textbf{b}, Package dependency view highlighting the modular structure and inter-package relationships within the system.}
     \label{fig:high_level_archtecture}
 \end{figure}
 
 The high-level architecture of the Re-Emission framework is illustrated in Figure~\ref{fig:high_level_archtecture}.
-Re-Emission can be used either through a \acf{CLI} or by directly accessing its Core Library components from Python scripts, as shown in Figure~\figref[a]{fig:high_level_archtecture}.
-The \ac{CLI} serves as the primary user interface, enabling users to perform emission analyses via simple commands.
-When a command is executed, the \ac{CLI} delegates control to a configuration loader, which parses and validates the configurable model parameters, execution options (e.g., choice of submodels), and presentation settings (e.g., selection of output variables and associated metadata).
-These configurations are defined in YAML and INI files located in the \vrbbrk{reemission/config/} directory and are passed to both the Core Library and \vrbbrk{reemission.presenter}; see Figure~\figref[b]{fig:high_level_archtecture}.
-This design ensures a clear separation between logic (model equations) and data (model parameters and inputs).
+Re-Emission can be used either via a \acf{CLI} or by directly accessing its Core Library components within Python scripts, as shown in Figure~\figref[a]{fig:high_level_archtecture}.
+The \ac{CLI} serves as the primary user interface, enabling emission analyses through straightforward commands.
+When a command is executed, control is passed to a configuration loader, which parses and validates the user-defined model parameters, execution settings (e.g., selection of submodels), and presentation options (e.g., choice of output variables and associated metadata).
+These configurations are specified in YAML and INI files located in the \vrbbrk{reemission/config/} directory and are then passed to both the Core Library and the \vrbbrk{reemission.presenter} module (Figure~\figref[b]{fig:high_level_archtecture}).
+This design enforces a clear separation between logic (model equations) and data (parameters and inputs).
 
-The input data, provided in JSON format and containing reservoir, catchment, and climatic parameters, are read and parsed by \vrbbrk{reemission.input}, and converted into a strongly typed \vrbbrk{Inputs} object for use in the emission model.
-This input data can be assembled either manually, by compiling information from various sources, or automatically, via an upstream reservoir and catchment processing tool such as GeoCARET~\cite{heettool}, with which Re-Emission integrates (see Section~\ref{sec:integration}).
-Once the model run is completed, the results are forwarded to an output generator, where outputs are produced in several formats, including Excel workbooks (XLSX), structured JSON files, and HTML and PDF reports.
-The presentation functionality is implemented in \vrbbrk{reemission.presenter}, where information about inputs, outputs, and intermediate variables is sourced from \vrbbrk{reemission.model} and \vrbbrk{reemission.profile}. 
-This allows the simulation input and output information to be presented as both text and graphical visualisations.
-The loading, overriding, and sharing of configuration files are managed by \vrbbrk{reemission.registry}.
+Input data are provided in JSON format and include reservoir, catchment, and climatic variables. 
+These are read by \vrbbrk{reemission.input} and converted into a strongly typed \vrbbrk{Inputs} object used by the emission model.
+Input data can be compiled manually from various data sources or generated automatically through upstream tools such as GeoCARET~\cite{heettool}, with which Re-Emission integrates (see Section~\ref{sec:integration}).
+Upon completion of a model run, outputs are passed to a reporting engine that generates results in multiple formats, including Excel workbooks (XLSX), structured JSON files, as well as HTML and PDF reports.
+Presentation functionality is handled by \vrbbrk{reemission.presenter}, which collates inputs, outputs, and intermediate variables from \vrbbrk{reemission.model} and \vrbbrk{reemission.profile}.
+This enables both textual and graphical visualisations of the simulation outputs.
+The loading, modification, and reuse of configuration files are managed by the \vrbbrk{reemission.registry} module.
 %e cumulative reservoir emissions over time, based on each reservoirs' construction dates and their respective emission decay rates. 
 % % -- such as regression coefficients, pre-impoundment emissions, and nutrient exports from land -- such as choice of submodels
 %The input data and configuration settings are then routed into the Core Library highlighted in Figure~\figref[b]{fig:high_level_archtecture} by a lemon yellow rectangle. 
@@ -559,30 +540,28 @@ The loading, overriding, and sharing of configuration files are managed by \vrbb
 \begin{figure}[ht]
     \centering
     \includegraphics[width=0.99\textwidth]{figures/high_level_uml2.pdf}
-	\caption{UML class diagram of the \texttt{reemission} framework, illustrating key classes and their relationships. Core components include \texttt{EmissionModel}, \texttt{Reservoir}, \texttt{Catchment}, \texttt{Emission}, \texttt{Inputs}, and \texttt{Presenter}, with abstract interfaces used to enforce modularity and extensibility.}
+	\caption{UML class diagram of \textit{Re-Emission}, illustrating key classes and their relationships. Core components include \texttt{EmissionModel}, \texttt{Reservoir}, \texttt{Catchment}, \texttt{Emission}, \texttt{Inputs}, and \texttt{Presenter}, with abstract interfaces used to enforce modularity and extensibility.}
     \label{fig:high_level_uml}
 \end{figure}
 
-A more detailed representation of the internal structure and inter-class relationships within the modules shown in Figure~\figref[b]{fig:high_level_archtecture} is provided in the UML class diagram in Figure~\ref{fig:high_level_uml}.
-The \texttt{EmissionModel} class encapsulates the simulation logic, including the instantiation of \vrbbrk{Reservoir}, \vrbbrk{Catchment}, and \vrbbrk{Emission} objects (e.g., \vrbbrk{MethaneEmission} for CH$_4$), and the subsequent calculation of \ac{GHG}-related intermediate and output variables.
-The \vrbbrk{Reservoir} and \vrbbrk{Catchment} objects are supplied to \vrbbrk{EmissionModel} by the \vrbbrk{Inputs} class.
-Each individual \vrbbrk{Emission} object extends the abstract \vrbbrk{Emission} class, which defines four abstract methods that must be implemented by all its subclasses.
-The \vrbbrk{Presenter} class employs \vrbbrk{Writer} objects to generate outputs in various file formats. 
-All \vrbbrk{Writer} objects must inherit from the abstract \vrbbrk{Writer} class, which defines a common interface for all writers.
-The currently supported file formats include JSON, XLSX, PDF (via \LaTeX), and HTML.
-The \vrbbrk{Reservoir}, \vrbbrk{Catchment}, \vrbbrk{Emission}, and \vrbbrk{Presenter} classes are parameterized by configuration files containing information such as regression coefficients, pre-impoundment emission factors, nutrient export rates from land, and presentation options specific to the \vrbbrk{Presenter} class.
-Further details on the structure of the \vrbbrk{Reservoir} and \vrbbrk{Catchment} classes, as well as the representation of model inputs, are provided in the Appendix in Figure~\ref{fig:river_network_emissions_uml}.
+A more detailed representation of the internal structure and inter-class relationships is shown in the UML class diagram in Figure~\ref{fig:high_level_uml}.
+The \texttt{EmissionModel} class encapsulates the core simulation logic, including the instantiation of \vrbbrk{Reservoir}, \vrbbrk{Catchment}, and \vrbbrk{Emission} objects (e.g., \vrbbrk{MethaneEmission} for CH$_4$), and the subsequent computation of intermediate and output \ac{GHG} variables.
+The \vrbbrk{Reservoir} and \vrbbrk{Catchment} objects are provided to the \vrbbrk{EmissionModel} via the \vrbbrk{Inputs} class.
+Each \vrbbrk{Emission} object inherits from an abstract \vrbbrk{Emission} base class, which defines four abstract methods that must be implemented by all subclasses.
+The \vrbbrk{Presenter} class uses \vrbbrk{Writer} objects to export outputs in different formats.
+All \vrbbrk{Writer} objects inherit from an abstract \vrbbrk{Writer} base class that defines a unified interface for generating outputs.
+Supported output formats include JSON, XLSX, PDF (via \LaTeX), and HTML.
+The \vrbbrk{Reservoir}, \vrbbrk{Catchment}, \vrbbrk{Emission}, and \vrbbrk{Presenter} classes are parameterized via configuration files containing regression coefficients, pre-impoundment emission factors, nutrient export rates, and presentation options specific to the \vrbbrk{Presenter}.
+Further details on the internal structure of the \vrbbrk{Reservoir} and \vrbbrk{Catchment} classes, as well as model input representations, are provided in the Appendix in Figure~\ref{fig:river_network_emissions_uml}.
 
-\subsection{Using Re-Emission as a Python package}
+\subsection{Using Re-Emission as a library}
 \label{subsec:scripting}
 
-Re-Emission can also be used as a library, enabling its functions and classes to be called directly within Python scripts to perform emission calculations. These calculations may be carried out step by step by manually constructing \vrbbrk{Reservoir} and \vrbbrk{Catchment} objects, followed by instantiating and executing \vrbbrk{Emission} objects, as shown in Listings~\ref{lst:em_calc_setup} and~\ref{lst:em_calc} in the Appendix. 
-Alternatively, the \vrbbrk{EmissionModel} class may be used to streamline this process, as demonstrated in Listing~\ref{lst:em_calc_file}.
-In addition to simplifying execution, the use of \vrbbrk{EmissionModel} enables results to be saved in multiple file formats via the \vrbbrk{Presenter} class, as shown in Listing~\ref{lst:em_calc_presentation}.
-
-In both usage modes, the analytical workflow (excluding the presentation of results) follows an algorithmic structure illustrated in Algorithm~\ref{alg:reemission}. 
-Input data and model parameters are first read from structured data and configuration files. 
-The input is then validated prior to computation. Reservoir emissions are subsequently calculated for each reservoir defined in the dataset, and raw results are written to a JSON output file.
+Re-Emission can be used as a Python library, allowing its functions and classes to be invoked directly within Python scripts to perform emission calculations.
+These calculations can be conducted step by step by manually constructing \vrbbrk{Reservoir} and \vrbbrk{Catchment} objects, followed by instantiating and executing \vrbbrk{Emission} objects, as demonstrated in Listings~\ref{lst:em_calc_setup} and~\ref{lst:em_calc} in the Appendix.
+Alternatively, the \vrbbrk{EmissionModel} class provides a streamlined interface for this process, as illustrated in Listing~\ref{lst:em_calc_file}.
+In addition to simplifying execution, use of the \vrbbrk{EmissionModel} class enables results to be exported in multiple formats via the \vrbbrk{Presenter} class (see Listing~\ref{lst:em_calc_presentation}).
+In both modes of use, the analytical workflow, excluding result presentation, follows the algorithmic structure shown in Algorithm~\ref{alg:reemission}. Input data and model parameters are first read from structured data and configuration files. These inputs are then validated prior to computation. Emissions are subsequently calculated for each reservoir defined in the dataset, and raw results are saved to a JSON output file.
 
 \begin{algorithm}[H]
 \caption{Reservoir Emission Estimation}
@@ -614,11 +593,11 @@ Save results to \texttt{output\_file.json}\;
 \subsection{Command-Line Interface}
 \label{subsec:cli}
 
-Re-Emission can also be used via a simple \acf{CLI}. 
-Full usage instructions can be accessed by running \vrbbrk{reemission --help} in the terminal or console.
-A typical example of a command-line invocation is shown in Listing~\ref{lst:em_calc_cli}, where input data are provided in \vrbbrk{input.json} and outputs are generated in multiple formats, including PDF, JSON, XLSX, and HTML.
-In addition to performing emission calculations, the \ac{CLI} includes commands for converting and modifying input datasets. 
-These are described further in Section~\ref{sec:integration}, which covers integration with upstream reservoir and catchment data processing; see also Listing~\ref{lst:integration_cli}.
+Re-Emission can also be used via a simple \acf{CLI}.
+Full usage instructions are available by running \vrbbrk{reemission --help} in a terminal or console.
+A typical command-line invocation is illustrated in Listing~\ref{lst:em_calc_cli}, where input data are supplied in \vrbbrk{input.json}, and outputs are generated in multiple formats, including PDF, JSON, XLSX, and HTML.
+Beyond emission calculation, the \ac{CLI} also supports commands for converting and modifying input datasets.
+These capabilities are described further in Section~\ref{sec:integration}, which focuses on integration with upstream reservoir and catchment data processing workflows (see also Listing~\ref{lst:integration_cli}).
 
 \begin{minipage}{0.95\textwidth}
 \begin{lstlisting}[language=bash, label={lst:em_calc_cli}, caption={Re-Emission \ac{CLI}: Emission calculations using input.json as the source of input data.}]
@@ -630,27 +609,26 @@ These are described further in Section~\ref{sec:integration}, which covers integ
 \end{lstlisting}
 \end{minipage}
 
-\subsection{Input and output data format}
+\subsection{Input and output data formats}
 \label{subsec:input_output_formats}
 
-The structure of the input and output data is illustrated in Figures~\ref{fig:input_data_format} and~\ref{fig:output_data_format}, respectively. 
-The input data format is fixed and determined by the parameter requirements of the \vrbbrk{Reservoir} and \vrbbrk{Catchment} classes.
-In contrast, the structure of the output data is largely configurable through YAML configuration files.
-To enhance readability, only a subset of the full input and output content is shown in the figures.
-In cases where data has been truncated, the omission is indicated using bold, light-blue text followed by an ellipsis (...).
-
+The structure of the input and output data is illustrated in Figures~\ref{fig:input_data_format} and~\ref{fig:output_data_format}, respectively.
+The input format is fixed and determined by the parameter requirements of the \vrbbrk{Reservoir} and \vrbbrk{Catchment} classes.
+In contrast, the structure of the output data is configurable via YAML configuration files.
+To improve clarity and readability, the figures show only a representative subset of the full input and output content.
+Where data has been truncated, omissions are marked using bold, light-blue text followed by an ellipsis (...).
 
 \begin{figure}[ht]
     \centering
     \includegraphics[width=0.75\textwidth]{figures/input_data_json.pdf}
-    \caption{Structure of an input JSON file containing example data for a single reservoir. The entries related to catchment and reservoir parameters, highlighted in steel blue and salmon, correspond directly to fields in the associated \vrbbrk{Catchment} and \vrbbrk{Reservoir} class definitions, respectively. Selected values have been truncated for readability, with truncated content indicated using light blue font colour.}
+    \caption{Structure of an input JSON file containing example data for a single reservoir. Entries related to catchment and reservoir parameters -- highlighted in steel blue and salmon, respectively -- correspond directly to fields defined in the \vrbbrk{Catchment} and \vrbbrk{Reservoir} classes. Selected values have been truncated for readability, with omissions indicated using light blue font colour followed by an ellipsis.}
     \label{fig:input_data_format}
 \end{figure}
 
 \begin{figure}[ht]
     \centering
     \includegraphics[width=0.9\textwidth]{figures/output_data_json.pdf}
-    \caption{Structure of an example configurable output JSON file. The file is divided into three sections: inputs, outputs, and internal variables, highlighted in steel blue, olive green, and salmon, respectively. Since the number of output entries can be arbitrarily large, selected values have been truncated for readability. Truncated content is indicated using light blue font colour.}
+    \caption{Structure of an example configurable output JSON file. The file is organized into three sections -- inputs, outputs, and internal variables -- highlighted in steel blue, olive green, and salmon, respectively. As the number of output entries can be arbitrarily large, selected values have been truncated for readability. Truncated content is indicated using light blue font colour followed by an ellipsis.}
     \label{fig:output_data_format}
 \end{figure}
 
@@ -661,30 +639,30 @@ Configuration data -- including model parameters, options for the \vrbbrk{Presen
 These files provide semi-structured data representations that can be readily loaded into Python as dictionary objects.
 The structure of these configuration files is illustrated in Figure~\ref{fig:config_uml} for presentation and model settings, Figure~\ref{fig:preimpoundment} for pre-impoundment emission factors, and Figure~\ref{fig:tp_tn_exports} for the parameterization of nutrient export models.
 
-Configuration data is managed by the \vrbbrk{ConfigLoader} class, which registers configuration files and lazily loads them on first access. 
-It also allows user-defined configurations to override default settings. 
-Instances of \vrbbrk{ConfigLoader} with the registered configuration files are made globally accessible through the \vrbbrk{reemission.registry} module.
+Configuration data is managed by the \vrbbrk{ConfigLoader} class, which registers configuration files and loads them lazily upon first access.
+It also supports overriding default settings with user-defined configurations.
+Instances of \vrbbrk{ConfigLoader} with registered configuration files are made globally accessible through the \vrbbrk{reemission.registry} module.
 
 \subsection{Containerized execution using Docker}
 \label{subsec:docker}
 
-To ensure reproducibility and simplify the deployment of Re-Emission we implemented a fully containerized workflow using Docker~\cite{merkel2014docker}, GitHub Actions, and the \acf{GHCR}, as visualized in Figure~\ref{fig:docker_containerizing}. 
-This approach ensures consistent runtime behaviour across systems and eliminates the need for complex setup procedures, thereby lowering the technical barriers to usage.
-Docker is an open-source platform that enables packaging applications and their dependencies into standardized units called containers, which can be executed as isolated environments.
-Re-Emission together with the Python interpreter, essential libraries, and other dependencies are encapsulated in a Docker image. 
-The source code and Docker configuration files (\verb|compose.yaml|) are hosted in a GitHub repository, where \ac{CI} is handled via GitHub Actions.
-A Docker image is automatically built and published to the GitHub Container Registry upon a push to the \verb|release| branch. 
-The image can be retrieved from the web using the standard \verb|docker pull| command, provided that Docker is installed on the user's computer.
+To ensure reproducibility and simplify the deployment of Re-Emission, we implemented a fully containerized workflow using Docker~\cite{merkel2014docker}, GitHub Actions, and the \acf{GHCR}, as illustrated in Figure~\ref{fig:docker_containerizing}.
+This approach guarantees consistent runtime behaviour across computing environments and eliminates the need for complex setup procedures, thereby lowering the technical barrier to adoption.
+Docker is an open-source platform that packages applications and their dependencies into standardized units called containers, which run in isolated environments.
+Re-Emission, along with the Python interpreter, essential libraries, and other dependencies, is encapsulated in a Docker image.
+The source code and Docker configuration files (e.g., \verb|compose.yaml|) are maintained in a GitHub repository, with \ac{CI} managed via GitHub Actions. Whenever changes are pushed to the \verb|release| branch, a Docker image is automatically built and published to the GitHub Container Registry.
+This image can be retrieved using the standard \verb|docker pull| command, assuming Docker is installed on the user's machine.
 
-The Re-Emission \ac{CLI} is invoked using \verb|docker compose run reemission| from within a directory that contains the \verb|compose.yaml| Docker configuration file.
-This file is required at runtime to map directories between the Docker container and the user's local environment, enabling access to input files and saving outputs.
-To streamline the Dockerized execution of Re-Emission, we also provide a companion repository that defines the required folder structure and configuration files for running the Re-Emission container, and specifies the locations of directories for reading inputs and saving outputs~\cite{janus_geocaret_reemission}; see \emph{Software Availability}.
+The Re-Emission \ac{CLI} can be executed via \verb|docker compose run reemission| from a directory containing the appropriate \verb|compose.yaml| configuration file.
+This file is required at runtime to map directories between the container and the host system, enabling access to input files and writing of output results.
+To further streamline the Dockerized execution of Re-Emission, a companion repository is provided that defines the necessary folder structure, configuration files, and volume mappings for running the Re-Emission container~\cite{janus_geocaret_reemission}; see \emph{Software Availability}.
 
-At present, the shared Docker images for Re-Emission do not include a \LaTeX\ distribution, which is required for generating PDF reports using the \verb|pylatex| library. 
-This omission is intentional, as including a full \LaTeX\ system, such as TeX~Live, would substantially increase the size of the Docker image, making it less practical for lightweight distribution and deployment. 
-As a result, PDF report generation is not currently supported in the containerized version of Re-Emission, although similar visually comparable reports can be generated in HTML format (see Section~\ref{subsec:input_output_formats}).
-For users who require PDF report generation within the Docker environment, a custom Docker image must be built by extending the official Re-Emission image with a \LaTeX\ installation. 
-This can be accomplished by writing a new Dockerfile (see Listing~\ref{lst:docker_with_latex}) and building the image with \verb|docker build -t reemission-with-latex .| executed in the directory containing Dockerfile.
+Currently, the shared Docker images for Re-Emission do not include a \LaTeX\ distribution, which is required for generating PDF reports via the \verb|pylatex| library.
+This exclusion is deliberate, as bundling a full \LaTeX\ system -- such as TeXLive -- would significantly increase the image size, reducing portability and practicality for lightweight deployments.
+Consequently, PDF report generation is not supported in the standard containerized version of Re-Emission.
+However, equivalent HTML-based reports can be generated as described in Section\ref{subsec:input_output_formats}.
+Users requiring PDF report generation within Docker must build a custom image by extending the official Re-Emission image with a \LaTeX\ installation.
+This can be achieved by creating a new Dockerfile (see Listing~\ref{lst:docker_with_latex}) and building the image using the command \verb|docker build -t reemission-with-latex .| executed in the directory containing the Dockerfile.
 
 \begin{figure}[ht]
     \centering
@@ -694,7 +672,7 @@ This can be accomplished by writing a new Dockerfile (see Listing~\ref{lst:docke
 \end{figure}
 
 \begin{minipage}{0.95\textwidth}
-\begin{lstlisting}[language=Dockerfile, , label={lst:docker_with_latex}, caption={Dockerfile for extending the Re-Emission image with a full TeX Live installation to enable PDF report generation}]
+\begin{lstlisting}[language=Dockerfile, , label={lst:docker_with_latex}, caption={Dockerfile for extending the Re-Emission image with a full TeX Live installation to support PDF report generation via PyLaTeX.}]
 # Dockerfile
 FROM ghcr.io/tomjanus/reemission:release
 # Install TeX Live
@@ -708,19 +686,21 @@ RUN apt-get update && \
 \section{Integration with upstream reservoir and catchment processing}
 \label{sec:integration}
 
-The principal challenge in estimating emissions from multiple reservoirs using spatially explicit emission models such as G-res lies in the manual effort and time required to source and derive the necessary input data. 
-When input variables are not directly available, they must be extracted from geospatial datasets using various \ac{GIS} methods. 
-This typically involves the prior delineation of each reservoir and its corresponding catchment area, followed by the processing of diverse datasets such as \acp{DEM}, land cover maps, soil and biome classification layers, and various climate-related datasets. 
+The principal challenge in estimating emissions from multiple reservoirs using spatially explicit emission models such as G-res lies in the manual effort and time required to source and derive the necessary input data.
+When input variables are not directly available, they must be extracted from geospatial datasets using various \ac{GIS} methods.
+This typically involves delineating each reservoir and its corresponding catchment area, followed by processing diverse datasets such as \acp{DEM}, land cover maps, soil and biome classification layers, and various climate-related datasets.
 These steps are often labour-intensive and time-consuming, particularly at larger spatial scales.
 
 To streamline this process, we provide functionality for generating input JSON files for Re-Emission from the outputs of the open-source Geospatial CAtchment and REservoir analysis Tool (GeoCARET)~\cite{heettool}.
-GeoCARET defines algorithms for a variety of statistical and geometric operations required to derive reservoir and catchment characteristics, and executes them on \ac{GEE}~\cite{gorelick2017google} via its Python API. 
-This setup enables automated data acquisition and preprocessing across multiple reservoir sites with minimal overhead, providing the necessary inputs for the G-res model.
-While GeoCARET remains in an early stage of development, it is already capable of practical application and was used to produce input data for the two case studies featured in this paper.
+GeoCARET defines algorithms for a variety of statistical and geometric operations required to derive reservoir and catchment characteristics, and executes them on \ac{GEE}~\cite{gorelick2017google} via its Python API.
+This setup enables automated data acquisition and preprocessing across multiple reservoir sites with minimal overhead, supplying the necessary inputs for the G-res model.
+Although GeoCARET is still in the early stages of development, it is already suitable for practical application and was used to generate the input data for the two case studies presented in this paper.
 
-Integration between the tools is supported through a suite of \ac{CLI} functions, illustrated in Listing~\ref{lst:integration_cli}, that (i) merge multiple tabular files and populate missing variables (e.g., those not derivable from geospatial datasets and requiring manual input), (ii) convert tabular data to JSON format, and (iii) optionally merge individual reservoir and catchment shapefiles to facilitate the mapping and visualization of emissions. 
-The integration workflow is further simplified by running both tools within their respective Docker containers, coordinated through the Re-Emission -- GeoCARET companion repository~\cite{janus_geocaret_reemission} introduced earlier; see \emph{Software Availability} for details.
-
+Integration between the tools is supported through a suite of \ac{CLI} functions, illustrated in Listing~\ref{lst:integration_cli}, that:
+(i) merge multiple tabular files and populate missing variables (e.g., those not derivable from geospatial datasets and requiring manual input);
+(ii) convert tabular data to JSON format; and
+(iii) optionally merge individual reservoir and catchment shapefiles to support the mapping and visualization of emissions.
+The integration workflow is further streamlined by running both tools within their respective Docker containers, coordinated through the Re-Emission--GeoCARET companion repository~\cite{janus_geocaret_reemission} introduced earlier (see \emph{Software Availability} for details).
 
 \begin{minipage}{0.95\textwidth}
 \begin{lstlisting}[language=bash, 
@@ -757,24 +737,25 @@ label={lst:integration_cli}, caption={Re-Emission CLI: Processing outputs from t
 \section{Emission model validation}
 \label{sec:validation}
 
-We conducted a validation study to verify the correctness of Re-Emission’s implementation of the G-res model and to ensure that no implementation errors were introduced into the software’s core engine due to the additional complexity of the presentation, input handling, and configuration modules.
+We conducted a validation study to verify the correctness of Re-Emission's implementation of the G-res model and to ensure that no errors were introduced into the software’s core engine through the added complexity of presentation, input handling, and configuration modules.
 
-For this purpose, we independently re-implemented the G-res model based on its original formulation~\cite{Prairie2021} using the R programming language. Both implementations were used to compute final outputs (e.g., gross and net areal CO$_2$ and CH$_4$ emissions across various emission pathways) and intermediate variables involved in the emission calculations. 
-By systematically comparing the outputs and inspecting the source code of both implementations, we significantly reduced the likelihood of computational discrepancies.
+To this end, we independently re-implemented the G-res model in the R programming language, following its original formulation~\cite{Prairie2021}.
+Both implementations were used to compute final outputs -- such as gross and net areal CO$_2$ and CH$_4$ emissions across different emission pathways -- as well as intermediate variables involved in the emission calculations.
+By systematically comparing outputs and inspecting the source code of both implementations, we substantially reduced the likelihood of computational discrepancies.
 
-To evaluate model accuracy across a broad input space, we constructed a synthetic validation dataset by randomly perturbing categorical input variables.
-This allowed us to explore combinations of parameter values not previously encountered in our case studies. 
-The resulting dataset comprises 246 reservoirs derived from modifications to real reservoirs located in Scotland, Wales, and Myanmar. 
+To assess model accuracy across a broad input space, we constructed a synthetic validation dataset by randomly perturbing categorical input variables.
+This allowed us to explore parameter combinations not encountered in our case studies so far.
+The resulting dataset comprises 246 reservoirs derived from modifications of real reservoirs located in Myanmar and the United Kingdom.
 These inputs span a wide range of land-cover types, biomes, climate zones, soil types, land-use intensities, and catchment-wide treatment factors.
 
-The agreement between Re-Emission and the R-based implementation of the G-res model is illustrated in Figures~\ref{fig:validation_plot_gross_emissions} and \ref{fig:validation_plot_net_emissions}. 
-The results show a near-perfect match across gross areal emissions by pathway (Figure~\ref{fig:validation_plot_gross_emissions}), pre-impoundment emissions (Figure~\figref[a]{fig:validation_plot_net_emissions}), and net anthropogenic emissions (Figure~\figref[b]{fig:validation_plot_net_emissions}), with the coefficient of determination ($R^2$) equal to 1.000 in all cases.
-These findings confirm that Re-Emission produces reliable estimates of reservoir emissions under a wide variety of environmental and geographical conditions.
+Agreement between Re-Emission and the R-based implementation is illustrated in Figures~\ref{fig:validation_plot_gross_emissions} and \ref{fig:validation_plot_net_emissions}.
+The results show a near-perfect match across gross areal emissions by pathway (Figure~\ref{fig:validation_plot_gross_emissions}), pre-impoundment emissions (Figure~\figref[a]{fig:validation_plot_net_emissions}), and net anthropogenic emissions (Figure~\figref[b]{fig:validation_plot_net_emissions}), with coefficients of determination ($R^2$) equal to 1.000 in all cases.
+These findings confirm that Re-Emission produces reliable estimates of reservoir emissions under a wide range of environmental and geographical conditions.
 
 \begin{figure}[ht]
     \centering
     \includegraphics[width=1.0\textwidth]{figures/comparison_plot.pdf}
-    \caption{{Comparison of gross areal emission rates via four emission pathways -- CO$_2$ diffusion, CH$_4$ diffusion, CH$_4$ ebullition, and CH$_4$ degassing (from left to right) -- predicted using Re-Emission (y-axis) and the R-based G-res implementation (x-axis).}}
+    \caption{{Comparison of gross areal emissions via four emission pathways -- CO$_2$ diffusion, CH$_4$ diffusion, CH$_4$ ebullition, and CH$_4$ degassing (from left to right) -- predicted using Re-Emission (y-axis) and the R-based G-res implementation (x-axis).}}
     \label{fig:validation_plot_gross_emissions}
 \end{figure}
 
@@ -789,12 +770,11 @@ These findings confirm that Re-Emission produces reliable estimates of reservoir
 \section{Case Studies}
 \label{sec:case_studies}
 
-We present two case studies to demonstrate the application of some of the key functionalities in Re-Emission for estimating \ac{GHG} emissions from reservoirs: (i) the estimation of total life-cycle emissions and emission profiles at scale, and (ii) the assessment of emissions under parametric uncertainty.
-The first case study illustrates how Re-Emission can support emission assessments from multiple reservoirs, e.g. regionally or nationally.
-The second showcases how Re-Emission can be coupled with the Python-based sensitivity analysis library SALib~\cite{Iwanaga_Toward_SALib_2_0_2022} to explore the global sensitivity and uncertainty of emission predictions in response to uncertain model parameters.
-This capability is of both practical and scientific relevance: it can inform robust decision-making and contribute to advancing methodological research in reservoir emission modelling. 
-To the best of our knowledge, the impact of uncertainties -- particularly input uncertainties -- on emission estimates has not received sufficient attention in the literature to date. 
-Re-Emission addresses this gap by supporting uncertainty and sensitivity analyses with SALib.
+We present two case studies to demonstrate key functionalities of Re-Emission for estimating \ac{GHG} emissions from reservoirs: (i) the estimation of total life-cycle emissions and emission profiles at scale, and (ii) the assessment of emissions under parametric uncertainty.
+The first case study illustrates how Re-Emission facilitates emission assessments across multiple reservoirs, for example at regional or national scales. The second case study demonstrates the integration of Re-Emission with the Python-based sensitivity analysis library SALib~\cite{Iwanaga_Toward_SALib_2_0_2022}, enabling exploration of global sensitivity and uncertainty in emission predictions due to uncertain model parameters.
+This functionality has both practical and scientific significance: it supports robust decision-making and contributes to methodological advancements in reservoir emission modelling.
+To the best of our knowledge, the influence of uncertainties -- particularly input uncertainties -- on emission estimates has received limited attention in the existing literature.
+Re-Emission helps address this gap by enabling uncertainty and sensitivity analysis of emission models with SALib.
 
 \subsection{Emission trajectories from existing and planned assets in Myanmar}
 \label{subsec:myanmar}
@@ -803,6 +783,7 @@ In this case study, we estimate the temporal evolution of total biogenic \ac{GHG
 Myanmar possesses substantial hydropower potential, with over 100~GW of identified capacity~\citep{EA_Myanmar}.
 Although the country aims to triple its hydropower capacity by 2030~\citep{Aung2020}, the greenhouse gas implications of these proposed developments remain poorly understood. 
 Moreover, biogenic emissions from existing irrigation reservoirs -- of which there are many -- have received limited attention despite their potentially significant atmospheric impact.
+
 Using Re-Emission, we estimated emissions from all identified irrigation (IRR), multipurpose (MP), and hydropower (HP) reservoirs in Myanmar known to us. 
 For each reservoir, we generated emission profiles (i.e., the temporal trajectory of biogenic emissions following impoundment) and aggregated them to derive national-scale emission trajectories.
 
@@ -813,7 +794,9 @@ The missing construction dates for existing irrigation reservoirs were sampled f
 This approach reflects historical trends in irrigation infrastructure development.
 In contrast, the unknown commissioning dates for planned hydropower projects were sampled uniformly between the current year (2025) and an assumed planning horizon (2045), by which time all planned projects are assumed to become operational.
 
-The results are presented in Figure~\ref{fig:mya_emission_profile} as ensemble plots, showing the range of possible emission trajectories, the median profile, and total emissions from irrigation reservoirs alone (IRR) as well as from all reservoirs combined (IRR + HP + MP). The results suggest that uncertainty in the construction dates of irrigation reservoirs does not substantially affect the national emission profile from irrigation assets. Emissions from these reservoirs appear to have peaked around 2005 and have been declining steadily since.
+The results, presented in Figure~\ref{fig:mya_emission_profile}, show ensemble plots of possible emission trajectories, including the median profile and total emissions from irrigation reservoirs alone (IRR) as well as all reservoirs combined (IRR + HP + MP).
+The findings suggest that uncertainty in the construction dates of irrigation reservoirs does not substantially affect the national emission profile for this class of assets. 
+Emissions from these reservoirs appear to have peaked around 2005 and have been declining steadily since.
 In contrast, the timing of construction for planned hydropower and multipurpose projects introduces significant uncertainty into the magnitude and timing of future emission peaks.
 These projects are projected to contribute substantially to Myanmar’s biogenic \ac{GHG} emissions, with peak emissions likely to occur between 2030 and 2050.
 While emissions are expected to decline sharply following the peak, they are projected to remain above current levels through at least 2060.
@@ -840,12 +823,11 @@ Enabling uncertainty analysis and probabilistic emission estimation under parame
 
 Re-Emission facilitates the quantification of uncertainty arising from model parameters and inputs through an interface to the Python-based sensitivity analysis library SALib~\cite{Iwanaga_Toward_SALib_2_0_2022}.
 At present, Re-Emission supports global sensitivity analysis using the Sobol method.
-The interface takes advantage of Re-Emission’s flexibility to dynamically modify configuration parameters -— such as regression coefficients for emission models, pre-impoundment emission factors, or nutrient export values -- to perform both sensitivity analysis and Monte Carlo simulations under parametric uncertainty.
-It also supports uncertainty quantification due to uncertain inputs.
-It accommodates various probability distributions supporting continuous, discrete, and categorical variables.
+The interface leverages Re-Emission’s flexibility to dynamically modify configuration parameters -- such as regression coefficients for emission models, pre-impoundment emission factors, or nutrient export values -- to perform both sensitivity analysis and Monte Carlo simulations under parametric uncertainty.
+It also supports uncertainty quantification arising from uncertain inputs and accommodates various probability distributions, including continuous, discrete, and categorical variables.
 
 To demonstrate these capabilities, we conducted an analysis of parametric uncertainty in the G-res diffusive CO$_2$ and CH$_4$ emission models and evaluated their effect on total net anthropogenic emission estimates. 
-We applied this analysis to 20 reservoirs located in Wales and Scotland. 
+This analysis was applied to 20 reservoirs located in Wales and Scotland. 
 %The results are summarized in Figure~\ref{fig:uncertainty_analysis}. 
 The results show that uncertainty in total net emission estimates is largely driven by the CO$_2$ diffusion process (Figure~\figref[b]{fig:uncertainty_analysis}), particularly the ``$\textrm{k}_1\,\textrm{diff}\,\textrm{co2}$'' coefficient. Coefficients ``$\textrm{k}_6\,\textrm{diff}\,\textrm{co2}$'' and ``$\textrm{k}_1\,\textrm{diff}\,\textrm{ch4}$'' also contribute to output variability, but their influence varies across reservoirs. This suggests that their importance is context-dependent, likely influenced by site-specific conditions or the relative contribution of individual emission pathways. 
 Total net emission estimates for all 20 reservoirs, along with 95\% prediction intervals, are shown in Figure~\figref[c]{fig:uncertainty_analysis}.
@@ -884,41 +866,37 @@ Quantification of parametric uncertainty in total net emissions from CO$_2$ and 
 \section{Discussion}
 \label{sec:discussion}
 
-In this manuscript, we have shown a critical gap in the current technological landscape that has hindered scientists and practitioners from estimating reservoir greenhouse gas emissions using spatially explicit models. 
-To address this gap, we developed an open-source software tool that can process outputs form GeoCARET -- an automated reservoir and catchment processing framework -- to enable automated assessments of reservoir emissions.
-We demonstrate the capabilities of the software through two case studies, showcasing its application in estimating emissions from large collections of reservoirs, its configurability, and its capacity for solving more advanced analyses, such as uncertainty quantification and probabilistic modelling.
-While the tool offers significant improvements over existing solutions, we acknowledge several limitations that merit future development. 
-These limitations, along with the tool's benefits and proposed directions for further work, are discussed in detail in the following sections.
+In this manuscript, we have identified a critical gap in the current technological landscape that limits the ability of scientists and practitioners to estimate greenhouse gas emissions from reservoirs using spatially explicit models.
+To address this, we developed an open-source software tool that integrates with GeoCARET -- an automated reservoir and catchment processing framework -- to enable automated assessments of reservoir emissions.
+We demonstrated the software’s capabilities through two case studies, highlighting its application to large collections of reservoirs, its configurability, and its ability to support advanced analyses such as uncertainty quantification and probabilistic modelling.
+While the tool represents a significant advancement over existing solutions, several limitations remain that warrant future development.
+These limitations, along with the tool's benefits and proposed directions for further work, are discussed in the following sections.
 
 \subsection{Limitations}
 \label{subsec:limitations}
 
-%\hl{here I would clearly partition limitations that are 'software limitations' and those that are science-data limitations}
-
-Despite several advancements over existing software, \emph{Re-Emission} currently exhibits several limitations that merit further development.
-First, the tool is currently designed primarily for implementing and extending the G-res model. 
-As such, it cannot be viewed as a general-purpose framework capable of adopting diverse modelling paradigms (e.g., process-based approaches, hydrodynamic models, etc.). 
-%It is limited to G-res and models that are conceptually similar.
-Second, because the tool implements the G-res model along with several model extensions, it inherits the limitations, biases, and uncertainties of those models. 
-While largely based on empirical dataset by \citet{Deemer2016}, comprising measurements from 167 hydropower reservoirs globally but with uneven geographical distribution, the regressions in the G-res model based on this dataset may not adequately represent the diversity of reservoir types and climatic conditions leading to biases and inaccuracies; see e.g. \citet{Hansen2022}.
-%Another limitation concerns the model's reliance on significant amounts of input data that need to be derived manually from geospatial datasets for each individual reservoir; see e.g. the G-res Tool~\cite{Prairie2021}.
-%This manual effort presents a substantial barrier to scaling reservoir emission assessments with G-res to larger spatial extents, such as national, regional, or global analyses.
-The current implementation does not support modelling of emissions from cascading systems -- i.e., from series of reservoirs where the outflow from an upstream reservoir becomes the inflow for a downstream one. 
-Finally, \emph{Re-Emission} is not yet prepared to integrate with models of emissions from other types of aquatic systems, such as rivers and streams~\cite{Rocher-Ros2023}, lakes~\cite{Zhuang2023}, or wetlands~\cite{Hu2024}. 
-Although practically-relevant models for these systems are still under development, multi-system modelling will likely be essential in the future and will require tools that facilitate such model integrations. 
-Advancing towards integrated assessments of catchment-scale greenhouse gas and macronutrient budgets will be crucial for developing more transparent and spatially resolved understandings of aquatic system contributions to the global carbon cycle, ultimately informing science-based reporting and decision-making.
+Despite its several advancements over existing software, Re-Emission currently exhibits notable limitations that warrant further development.
+First, the tool is primarily designed to implement and extend the G-res model.
+Consequently, it cannot be regarded as a general-purpose framework capable of accommodating a broad range of modelling paradigms (e.g., process-based approaches or hydrodynamic models).
+Second, as Re-Emission incorporates the G-res model along with several of its extensions, it inherently inherits the limitations, biases, and uncertainties associated with these models.
+%While the G-res model is largely based on the empirical dataset compiled by \citet{Deemer2016}—which includes measurements from 167 hydropower reservoirs globally—it suffers from uneven geographic representation. As a result, the regression-based relationships derived from this dataset may not adequately capture the diversity of reservoir types and climatic conditions, leading to potential biases and inaccuracies \citep[see, e.g.,][]{Hansen2022}.
+Third, the current implementation does not support the simulation of emissions from cascading reservoir systems -- i.e., series of reservoirs where the outflow of an upstream reservoir forms the inflow to a downstream one.
+This limits its applicability in river basins where such reservoir configurations are common.
+Finally, Re-Emission is not yet equipped to integrate emission models for other aquatic systems, such as rivers and streams \citep{Rocher-Ros2023}, lakes \citep{Zhuang2023}, or wetlands \citep{Hu2024}.
+Although modelling frameworks for these systems are still under development, future applications will likely require tools that enable multi-system integration.
+Advancing towards integrated assessments of greenhouse gas and nutrient budgets at the catchment scale will be essential for generating more spatially resolved and transparent representations of aquatic system contributions to the global carbon cycle, thereby supporting science-based reporting and decision-making.
 
 \subsection{Benefits}
 \label{subsec:benefits}
 
-The \emph{Re-Emission} package advances the state of the art in modelling reservoir \ac{GHG} emissions by providing a programmatic solution that enables batch processing of reservoirs and facilitates the scaling of emission assessments to multiple reservoirs. 
-Moreover, it systematizes the process of modelling emissions using G-res and other prospective spatially explicit models that adopt a similar conceptual framework.
-Its modular architecture, combined with its open-source nature, allows users to extend the framework by incorporating new sub-models or applying custom parameterizations -- such as region-specific calibrations or updates based on new empirical data. 
-he importance of such model refinements and recalibrations has recently been highlighted by \citet{Pilla2025}.
-Written in Python -- one of the most widely used programming languages in the scientific and engineering communities -- the tool can be integrated easily into larger modelling frameworks. 
-This opens up opportunities for a wide range of studies, including the prediction of emissions under parametric or input uncertainties and integration with other modelling frameworks -- such as the GeoCARET tool for delineating and analysing catchments and reservoirs, as demonstrated in this manuscript. 
-Finally, \emph{Re-Emission} offers a free and open-source alternative to proprietary tools, enabling cost-free emission analysis for both non-commercial and commercial applications. 
-Its open and automated design further enhances reproducibility and transparency in both research and applied settings.
+The \emph{Re-Emission} package advances the state of the art in modelling reservoir \ac{GHG} emissions by providing a programmatic solution that supports batch processing and facilitates the scaling of emission assessments to multiple reservoirs.
+In addition, it systematizes the modelling workflow for G-res and other prospective spatially explicit models that adopt similar conceptual frameworks. 
+Its modular architecture and open-source nature allow users to extend the framework by incorporating new sub-models or applying custom parameterization, such as region-specific calibrations or updates based on new empirical data.
+The importance of such model refinements and recalibrations has recently been emphasized by \citet{Pilla2025}.
+Developed in Python -- one of the most widely used programming languages in scientific and engineering domains -- the tool can be seamlessly integrated into broader modelling pipelines.
+This enables a wide range of applications, including the evaluation of emissions under parametric or input uncertainty, as well as integration with complementary tools such as GeoCARET for catchment and reservoir delineation, as demonstrated in this manuscript.
+Finally, \emph{Re-Emission} provides a free and open-source alternative to proprietary solutions, offering cost-free emission analysis for both academic and commercial users.
+Its transparent, modular, and automated design further promotes reproducibility and traceability in both research and applied contexts.
 
 % ----- do not use this text ------
 %designed to predict gross reservoir emissions via multiple emission pathways and quantify the share of net anthropogenic emissions
@@ -934,18 +912,21 @@ Its open and automated design further enhances reproducibility and transparency 
 \subsection{Future Work}
 \label{subsec:future_work}
 
-To address current limitations, future development of the \emph{Re-Emission} framework will be directed towards enhancing modularity, interoperability, and flexibility to support next-generation reservoir \ac{GHG} emission assessments.
-Although the current architecture is primarily centred on implementing the G-res model, we envision transitioning to a network-based architecture that represents interconnected reservoirs and river reaches. 
-Such a structure would provide a more flexible foundation for modelling emissions from hydrologically connected water bodies and address limitations such as the current inability to represent cascading reservoir systems. 
-In this framework, carbon and nutrient mass balances would be explicitly solved, with emissions represented as sinks and inflows from river inlets and catchment runoff as sources.
-Furthermore, adopting a plugin-oriented architecture would enable flexible model configurations by supporting interchangeable emission models and alternative formulations for key sub-processes, such as the estimation of hypolimnion depth or littoral zone area. 
-To enhance end-to-end automation and improve usability, tighter integration should be established with upstream geospatial analysis tools, such as GeoCARET, to streamline the automatic sourcing and processing of catchment and reservoir input data.
+To address current limitations, future development of the Re-Emission framework will focus on enhancing modularity, interoperability, and flexibility to support next-generation assessments of reservoir \ac{GHG} emissions.
+Although the current architecture is primarily centred on implementing the G-res model, we envision a transition to a network-based design that represents interconnected reservoirs and river reaches.
+This structure would provide a more versatile foundation for modelling emissions from hydrologically connected water bodies and would overcome current limitations, such as the inability to represent cascading reservoir systems.
+In this envisioned framework, carbon and nutrient mass balances would be explicitly solved, with emissions modelled as sinks, and inflows from river inlets and catchment runoff as sources.
 
-Beyond architectural enhancements, future work must also address underrepresented emission pathways and processes. 
-Recent empirical studies have underscored the significance of previously unmodelled emission sources, such as methane emissions from sediments~\cite{gruca2011, Isidorova2019-ft} and downstream CH$_4$ degassing~\cite{Soued2022, Zhou2024}, which in some cases may constitute up to 90\% of total reservoir-related emissions~\cite{Deshmukh}. 
-Accounting for these pathways will likely require coupling with complementary models or developing new modules that incorporate dynamic environmental conditions, such as water level fluctuations and wetting-drying cycles in littoral zones~\cite{Calamita2021, Ion2021} -- motivating a re-evaluation of existing modelling architectures.
-Finally, although \acf{N2O} is a highly potent climate forcer, it remains the least studied of the three major \acp{GHG} in aquatic systems and is not yet routinely included in reservoir emission models. 
-However, global estimates indicate that lakes and reservoirs emit substantial amounts of N$_2$O~\cite{Li2024}, and recent studies suggest that, under certain conditions—particularly in nutrient-rich or thermally stratified systems—N$_2$O emissions may rival or even exceed those of CH$_4$~\cite{Chen2025}. These findings underscore the urgent need for expanded empirical observations and for the systematic integration of \ac{N2O} emissions into reservoir modelling frameworks to more accurately represent the cumulative climatic impact of inland waters.
+Moreover, adopting a plugin-oriented architecture would allow for flexible model configurations by supporting interchangeable emission models and alternative formulations for key sub-processes, such as the estimation of hypolimnion depth or littoral zone area.
+To enhance end-to-end automation and improve usability, tighter integration with upstream geospatial tools -- such as GeoCARET -- should be established to streamline the automatic sourcing and processing of catchment and reservoir input data.
+
+Beyond architectural enhancements, future work must also address underrepresented emission pathways and processes.
+Recent empirical studies have underscored the importance of previously unmodelled sources, such as methane emissions from sediments~\cite{gruca2011, Isidorova2019-ft} and downstream CH$_4$ degassing~\cite{Soued2022, Zhou2024}, which in some cases may account for up to 90\% of total reservoir-related emissions~\cite{Deshmukh}.
+Accounting for these pathways will likely require coupling with complementary models or developing new modules that incorporate dynamic environmental conditions, including water level fluctuations and wetting-drying cycles in littoral zones~\cite{Calamita2021, Ion2021} -- necessitating a re-evaluation of existing modelling architectures.
+
+Finally, although \acf{N2O} is a highly potent climate forcer, it remains the least studied of the three major \acp{GHG} in aquatic systems and is not yet routinely included in reservoir emission models.
+However, global estimates suggest that lakes and reservoirs emit substantial amounts of N$_2$O~\cite{Li2024}, and recent studies indicate that under certain conditions -- particularly in nutrient-rich or thermally stratified systems -- N$_2$O emissions may rival or even exceed those of CH$_4$~\cite{Chen2025}.
+These findings underscore the urgent need for expanded empirical observations and for the systematic integration of \ac{N2O} into reservoir modelling frameworks to more accurately represent the cumulative climatic impact of inland waters.
 
 
 % ----- do not use this text ------
@@ -968,11 +949,11 @@ However, global estimates indicate that lakes and reservoirs emit substantial am
 \section{Conclusions}
 \label{sec:conclusions}
 
-The \emph{Re-Emission} package constitutes a significant advancement toward the standardized, transparent, and reproducible estimation of \acl{GHG} emissions from reservoirs. 
+The \emph{Re-Emission} package represents a significant advancement toward standardized, transparent, and reproducible estimation of \acl{GHG} emissions from reservoirs.
 By implementing the state-of-the-art G-Res model within an open-source Python environment, it provides researchers and practitioners with a flexible platform to apply, extend, and experiment with reservoir emission modelling across diverse contexts.
-Through integration with GeoCARET, the package further enables automated emission estimation with minimal manual input, facilitating automated analyses of multiple reservoirs, as demonstrated in the two case studies presented. 
-Despite current limitations and ongoing development needs, \emph{Re-Emission} is already suitable for practical applications, including the assessment of emissions from individual reservoirs, regional and national reservoir infrastructure evaluations, and integration into more complex analyses such as strategic planning in the \ac{WEFE} nexus.
-Importantly, the development of this tool aligns with the recommendations of the \emph{2019 Refinement to the 2006 \acs{IPCC} Guidelines for National Greenhouse Gas Inventories: Wetlands}~\cite{IPCC2019}, which advocate for the use of Tier~2 or Tier~3 methodologies, such as G-Res, to reduce uncertainty in emissions estimates where sufficient data and analytical resources become available.
+Integration with GeoCARET further enables automated emission estimation with minimal manual input, streamlining large-scale analyses of multiple reservoirs, as demonstrated in the two case studies presented.
+Despite current limitations and the need for ongoing development, \emph{Re-Emission} is already suitable for practical applications, including emission assessments of individual reservoirs, regional and national infrastructure evaluations, and integration into more comprehensive analyses -- such as those supporting strategic planning in the \ac{WEFE} nexus.
+Importantly, the development of this tool aligns with the recommendations of the \emph{2019 Refinement to the 2006 \acs{IPCC} Guidelines for National Greenhouse Gas Inventories: Wetlands}\cite{IPCC2019}, which advocate the adoption of Tier~2 or Tier~3 methodologies, such as G-Res, to reduce uncertainties in emission estimates where sufficient data and analytical capacity are available.
 
 %Building on the foundations of the G-res model, this study proposes an enhanced approach that requires minimal input data. By using only the location and height of a proposed hydropower dam, a suite of hydro-morphological parameters describing the catchment and reservoir can be derived. These parameters are then employed to estimate \ac{GHG} emission trajectories over a 100-year period, leveraging empirical relationships between physical characteristics and emission rates. This approach enables rapid, spatially explicit assessments of potential reservoir emissions and supports strategic planning in dam development and climate impact mitigation.
 
