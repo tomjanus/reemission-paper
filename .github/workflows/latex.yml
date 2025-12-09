@@ -36,13 +36,17 @@ jobs:
       - name: 📤 Upload compiled PDF
         uses: actions/upload-artifact@v4
         with:
-          name: paper-pdf
-          path: paper_source/reemission.pdf
-
+          name: paper-pdfs
+          path: |
+            paper_source/reemission_rev2.pdf
+            paper_source/supplementary_materials_r2.pdf
+            
       - name: 🐞 Upload LaTeX log on failure
         if: failure()
         uses: actions/upload-artifact@v4
         with:
           name: latex-log
-          path: paper_source/reemission.log
+          path: |
+            paper_source/reemission_rev2.log
+            paper_source/supplementary_materials_r2.log
 
