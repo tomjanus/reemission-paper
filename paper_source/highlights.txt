@@ -1,0 +1,6 @@
+• Re-Emission is a command-line tool and Python library for reservoir GHG analysis.
+• It automates GHG emission estimates across multiple reservoir systems.
+• It integrates with a GIS-based tool for reservoir and catchment analysis.
+• It supports multiple output and report formats and configuration options.
+• Case studies in the United Kingdom and Myanmar highlight Re-Emission’s fea-
+tures.

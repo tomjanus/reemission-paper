@@ -478,3 +478,6 @@ literature/
 paper_source/figures/src/
 code/outputs_and_intermediate/
 !paper_source/figures/*.pdf
+cover_letter/
+
+paper_source/figures/*.png
