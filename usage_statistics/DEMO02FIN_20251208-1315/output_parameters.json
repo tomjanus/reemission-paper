@@ -1,0 +1,203 @@
+{
+    "reservoir_8": {
+        "monthly_temps": [
+            22.3,
+            24.3,
+            27.3,
+            29.8,
+            29.0,
+            26.9,
+            26.5,
+            26.5,
+            27.0,
+            27.2,
+            25.7,
+            23.0
+        ],
+        "catchment": {
+            "runoff": 2116.0,
+            "area": 237.398,
+            "population": 12409.0,
+            "area_fractions": [
+                0.011,
+                0.501,
+                0.488,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0
+            ],
+            "slope": 22.0,
+            "precip": 1897.0,
+            "etransp": 1302.0,
+            "soil_wetness": 451.0,
+            "biogenic_factors": {
+                "biome": "Tropical & Subtropical Moist Broadleaf Forests",
+                "climate": 3,
+                "soil_type": "MINERAL",
+                "treatment_factor": "NA",
+                "landuse_intensity": "NA"
+            }
+        },
+        "reservoir": {
+            "volume": 148897310.0,
+            "area": 2.715,
+            "max_depth": 83.0,
+            "mean_depth": 54.8,
+            "area_fractions": [
+                0.0,
+                0.207,
+                0.793,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0
+            ],
+            "soil_carbon": 5.981
+        }
+    },
+    "reservoir_10": {
+        "monthly_temps": [
+            18.7,
+            21.4,
+            25.6,
+            28.5,
+            28.2,
+            26.5,
+            26.2,
+            26.0,
+            25.8,
+            25.1,
+            22.2,
+            19.0
+        ],
+        "catchment": {
+            "runoff": 1700.0,
+            "area": 2335.22,
+            "population": 24474.0,
+            "area_fractions": [
+                0.006,
+                0.375,
+                0.619,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0
+            ],
+            "slope": 39.0,
+            "precip": 2169.0,
+            "etransp": 1171.0,
+            "soil_wetness": 174.0,
+            "biogenic_factors": {
+                "biome": "Tropical & Subtropical Moist Broadleaf Forests",
+                "climate": 11,
+                "soil_type": "MINERAL",
+                "treatment_factor": "NA",
+                "landuse_intensity": "NA"
+            }
+        },
+        "reservoir": {
+            "volume": 2031179927.0,
+            "area": 40.369,
+            "max_depth": 146.0,
+            "mean_depth": 50.3,
+            "area_fractions": [
+                0.181,
+                0.15,
+                0.669,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0
+            ],
+            "soil_carbon": 5.652
+        }
+    },
+    "reservoir_9": {
+        "monthly_temps": [
+            22.3,
+            24.0,
+            27.0,
+            29.5,
+            28.9,
+            26.8,
+            26.3,
+            26.3,
+            26.8,
+            27.1,
+            25.7,
+            23.1
+        ],
+        "catchment": {
+            "runoff": 2219.0,
+            "area": 1906.529,
+            "population": 17615.0,
+            "area_fractions": [
+                0.018,
+                0.671,
+                0.284,
+                0.028,
+                0.0,
+                0.0,
+                0.0,
+                0.0
+            ],
+            "slope": 24.0,
+            "precip": 2594.0,
+            "etransp": 1337.0,
+            "soil_wetness": 530.0,
+            "biogenic_factors": {
+                "biome": "Tropical & Subtropical Moist Broadleaf Forests",
+                "climate": 2,
+                "soil_type": "MINERAL",
+                "treatment_factor": "NA",
+                "landuse_intensity": "NA"
+            }
+        },
+        "reservoir": {
+            "volume": 26052597059.0,
+            "area": 434.864,
+            "max_depth": 139.0,
+            "mean_depth": 59.9,
+            "area_fractions": [
+                0.075,
+                0.776,
+                0.149,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0
+            ],
+            "soil_carbon": 6.04
+        }
+    }
+}

@@ -1,0 +1,1 @@
+{"input_file_path": "data/demo2.csv", "jobname": "DEMO02FIN", "outputs": "standard", "jensen_search_radius": 1000, "upstreamMethod": 3, "paramHydroDEM": true, "resHydroDEM": true, "hydrodataset": "03", "delineate_snapped": true, "export_to_drive": false, "direct_to_vis": true}
