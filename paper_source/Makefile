@@ -1,11 +1,14 @@
 # File: Makefile
 
 # Directories and file namese
-MAIN_NAME = reemission
-BIB_NAME = references
+MAIN_NAME = reemission_rev2
+SUPP_NAME = supplementary_materials_r2
+BIB_NAME = reemission
 TEX = $(MAIN_NAME).tex
-BIB = $(MAIN_NAME).bib
+SUPP_TEX = $(SUPP_NAME).tex
+BIB = $(BIB_NAME).bib
 PDF = $(MAIN_NAME).pdf
+SUPP_PDF = $(SUPP_NAME).pdf
 SVG_DIR = figures
 PDF_DIR = figures
 
@@ -22,7 +25,7 @@ BIBTEX = $(shell command -v bibtex 2>/dev/null)
 .PHONY: all figs clean cleanall check-tools
 
 # Main target
-all: check-tools figs $(PDF)
+all: check-tools figs $(PDF) $(SUPP_PDF)
 
 # Convert all SVGs to PDFs
 figs: $(PDFS)
@@ -42,7 +45,7 @@ $(SVG_DIR)/%.pdf: $(SVG_DIR)/%.svg
 		cairosvg $< -o $@; \
 	fi
 
-# Compile the LaTeX document
+# Compile the main LaTeX document
 $(PDF): $(TEX) $(PDFS) $(BIB)
 ifeq ($(LATEXMK),)
 	@if [ -z "$(PDFLATEX)" ] || [ -z "$(BIBTEX)" ]; then \
@@ -51,13 +54,31 @@ ifeq ($(LATEXMK),)
 	else \
 		echo "🔧 Compiling with pdflatex and bibtex..."; \
 		$(PDFLATEX) $(TEX); \
-		$(BIBTEX) $(MAIN_NAME); \
+		$(BIBTEX) $(SUPP_NAME); \
 		$(PDFLATEX) $(TEX); \
 		$(PDFLATEX) $(TEX); \
 	fi
 else
 	@echo "🔧 Compiling with latexmk..."; \
 	$(LATEXMK) -pdf -bibtex -silent $(TEX)
+endif
+
+# Compile the supplementary document
+$(SUPP_PDF): $(SUPP_TEX) $(PDFS) $(BIB)
+ifeq ($(LATEXMK),)
+	@if [ -z "$(PDFLATEX)" ] || [ -z "$(BIBTEX)" ]; then \
+		echo "❌ No LaTeX compiler found (need latexmk or pdflatex + bibtex)"; \
+		exit 1; \
+	else \
+		echo "🔧 Compiling with pdflatex and bibtex..."; \
+		$(PDFLATEX) $(SUPP_TEX); \
+		$(BIBTEX) $(MAIN_NAME); \
+		$(PDFLATEX) $(SUPP_TEX); \
+		$(PDFLATEX) $(SUPP_TEX); \
+	fi
+else
+	@echo "🔧 Compiling with latexmk..."; \
+	$(LATEXMK) -pdf -bibtex -silent $(SUPP_TEX)
 endif
 
 # Tool checks
@@ -82,5 +103,5 @@ clean:
 
 cleanall: clean
 	@echo "🧹 Removing all generated PDFs (figures + main)..."
-	rm -f $(PDFS) $(PDF)
+	rm -f $(PDFS) $(PDF) $(SUPP_PDF)
 
