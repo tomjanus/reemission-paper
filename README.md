@@ -1,17 +1,14 @@
 # 📄 RE-Emission Paper
 
-This repository contains the LaTeX source for the paper titled **"Re-Emission — A Free, Open-Source Software for Estimating, Reporting, and Visualizing Greenhouse Gas Emissions from Reservoirs."** It also includes supplementary code, data, and analyses used to generate figures and perform analyses related to the manuscript.
+This repository contains the LaTeX source for the paper titled **"Re-Emission — A Free, Open-Source Software for Estimating, Reporting, and Visualizing Greenhouse Gas Emissions from Reservoirs."**  It also includes supplementary code in `PlantUML`, `Python`, and `R` used to generate figures and perform analyses related to the manuscript, including *Model Validation*, the *Myanmar Case Study*, and the *UK Case Study*.
 
-This includes:
-- *Model Validation*
-- *Myanmar Case Study*
-- *UK Case Study*
-- *G-res Re-emission Comparison*
-- *Sensitivity Analysis (Sobol)*
+# 📄 RE-Emission Paper Build System
 
-The repository also contains the cover letter, revisions, and usage statistics related to the paper's submission.
+This project automates the compilation of a LaTeX paper using tools such as `latexmk`, `pdflatex`, and common SVG-to-PDF converters (`inkscape`, `rsvg-convert`, `cairosvg`). It supports figures in `.svg` format and compiles them to `.pdf` before building the final paper.
 
-# ⚙️ Build Instructions
+---
+
+## ⚙️ Build Instructions
 
 You can compile the paper using:
 
@@ -49,22 +46,73 @@ make cleanall
 ```
 .
 ├── paper_source/
-│   ├── figures/                     # Contains all .svg and generated .pdf figures
-│   ├── reemission.tex               # Main LaTeX source file
-│   ├── reemission.bib               # Bibliography file
-│   ├── reemission.pdf               # Output (generated)
-│   └── Makefile                     # Build rules (LaTeX + figures)
+│   ├── figures/                         # Contains all .svg and generated .pdf figures
+│   ├── reemission.tex                   # Main LaTeX source file
+│   ├── reemission_rev1.tex              # Revision 1 of the paper
+│   ├── reemission_rev2.tex              # Revision 2 of the paper
+│   ├── reemission.bib                   # Bibliography file
+│   ├── supplementary_materials.tex      # Supplementary materials
+│   ├── supplementary_materials_r2.tex   # Supplementary materials revision 2
+│   ├── highlights.txt                   # Paper highlights
+│   ├── elsarticle.cls                   # Elsevier article class file
+│   ├── elsarticle-*.bst                 # Bibliography style files
+│   ├── reemission.pdf                   # Output (generated)
+│   └── Makefile                         # Build rules (LaTeX + figures)
 ├── code/
-│   ├── Python/                      # Python scripts for analysis and plotting
-│   ├── R/                           # R scripts for analysis and plotting
-│   ├── data/                        # Input data for case studies and validation
-│   ├── g_res_reemission_comparison/ # Jupyter notebook and data for comparing G-res and re-emission
-│   └── plantUML/                    # PlantUML diagrams
-├── usage_statistics/                # Usage statistics of the project
+│   ├── data/
+│   │   ├── myanmar_inputs.json          # Myanmar case study input data
+│   │   ├── uk_inputs.json               # UK case study input data
+│   │   ├── uk_inputs_trimmed.json       # Trimmed UK input data
+│   │   ├── validation_inputs.json       # Validation input data
+│   │   ├── validation_outputs.json      # Validation output data
+│   │   ├── reservoir_data_with_years.csv # Reservoir data with temporal information
+│   │   ├── sensitivity_analysis_input_data.yaml # Sensitivity analysis inputs
+│   │   └── dams_data/
+│   │       └── mya_dams.geojson         # Myanmar dams geospatial data
+│   ├── plantUML/                        # UML diagrams and configuration visualizations
+│   │   ├── c4_container_diagram.md
+│   │   ├── ch4_preimpoundment*.md
+│   │   ├── co2_preimpoundment*.md
+│   │   ├── class_uml_composite.md
+│   │   ├── input_file.md
+│   │   ├── output_file.md
+│   │   └── ...                          # Additional diagram files
+│   ├── Python/
+│   │   ├── create_test_input.py         # Script to create test inputs
+│   │   ├── create_test_input.sh         # Shell script for test input creation
+│   │   ├── run_sobol_batches.py         # Sobol sensitivity analysis runner
+│   │   ├── params_*.yaml                # Parameter configuration files
+│   │   ├── requirements.txt             # Python dependencies
+│   │   ├── mya_emission_profile_projections.ipynb # Myanmar projections notebook
+│   │   ├── uk_emissions_under_parametetric_unertainties.ipynb # UK uncertainty analysis
+│   │   └── README.md
+│   ├── g_res_reemission_comparison/
+│   │   ├── g-res-reemission-comparison.ipynb # Comparison analysis notebook
+│   │   ├── emission_profile_comparison.csv   # Emission profile data
+│   │   ├── total_emissions_comparison.csv    # Total emissions data
+│   │   └── figures/
+│   │       └── README.md
+│   └── R/
+│       ├── Gres_GHGcalcs on Geocaret output_val.R # G-res validation script
+│       ├── ReEmission_validation_plots.ipynb      # Validation plots notebook
+│       ├── comparison_data/
+│       │   ├── results_chris.csv
+│       │   └── validation_outputs_comb_30_6.csv
+│       └── README.md
+├── usage_statistics/                    # Usage statistics and benchmarking data
+│   ├── Completed_EECU-seconds_[MEAN].csv
+│   ├── Completed_EECU-seconds_[SUM].csv
+│   ├── filesize.txy
+│   ├── usage_plot.py
+│   └── DEMO02FIN_20251208-1315/
+│       ├── output_parameters.csv
+│       ├── output_parameters.json
+│       ├── settings.txt
+│       └── tasks.csv
 ├── .github/
 │   └── workflows/
-│       └── latex.yml                # GitHub Actions workflow for CI builds
-└── README.md                        # You're reading it
+│       └── latex.yml                    # GitHub Actions workflow for CI builds
+└── README.md                            # You're reading it
 ```
 
 ---
@@ -73,8 +121,12 @@ make cleanall
 
 On Windows:
 
-- Install a [LaTeX distribution](https://miktex.org/) (MiKTeX or TeX Live)
+- Install the [LaTeX distribution](https://miktex.org/) (MiKTeX or TeX Live)
 - Use WSL (Windows Subsystem for Linux) for best compatibility with `make`
+- Or run the Python script instead:
+  ```bash
+  python build.py
+  ```
 
 Ensure that required tools like `inkscape`, `rsvg-convert`, or `cairosvg` are on your system path. Use Chocolatey or Scoop to install them:
 
@@ -92,10 +144,9 @@ scoop install inkscape
 
 ## 🚀 Continuous Integration with GitHub Actions
 
-Every push to the repository will trigger a build using GitHub Actions. The compiled main file `reemission_rev2.pdf` and supplementary materials file `supplementary_materials_r2.pdf` are stored as an artifact.
+Every push to the repository will trigger a build using GitHub Actions. The compiled `reemission.pdf` is stored as an artifact.
 
 ```
 .github/workflows/latex.yml
 ```
-
 
